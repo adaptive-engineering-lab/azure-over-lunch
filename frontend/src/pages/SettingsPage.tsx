@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppStore, type Theme, type SessionLength } from '../lib/store';
 import { useAuth } from '../lib/auth/AuthProvider';
 import { supabase } from '../lib/supabase';
+import { ROUTES } from '../lib/routes';
 
 const SESSION_LENGTHS: SessionLength[] = [10, 20, 30];
 const THEMES: Theme[] = ['dark', 'light'];
@@ -77,6 +79,16 @@ export default function SettingsPage() {
       </fieldset>
 
       {user && <AccountSection email={user.email ?? ''} onSignOut={signOut} />}
+
+      {user && (
+        <Link
+          to={ROUTES.billing}
+          className="mt-4 block rounded-lg bg-bg-elevated p-4"
+        >
+          <p className="text-sm font-semibold">Billing</p>
+          <p className="mt-1 text-xs text-fg-muted">Manage your plan</p>
+        </Link>
+      )}
     </section>
   );
 }
