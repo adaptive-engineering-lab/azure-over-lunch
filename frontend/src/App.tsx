@@ -18,6 +18,7 @@ const SignInPage = lazy(() => import('./pages/SignInPage'));
 const AuthCallbackPage = lazy(() => import('./pages/AuthCallbackPage'));
 const DailyReviewPage = lazy(() => import('./pages/DailyReviewPage'));
 const BillingPage = lazy(() => import('./pages/BillingPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage'));
 
 function lazyPage(node: React.ReactNode) {
   return <Suspense fallback={<div className="p-4 text-fg-muted">Loading…</div>}>{node}</Suspense>;
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: ROUTES.authCallback, element: lazyPage(<AuthCallbackPage />) },
       { path: ROUTES.dailyReview, element: lazyPage(<DailyReviewPage />) },
       { path: ROUTES.billing, element: lazyPage(<BillingPage />) },
+      { path: ROUTES.admin, element: lazyPage(<AdminPage />) },
       {
         path: '*',
         element: (

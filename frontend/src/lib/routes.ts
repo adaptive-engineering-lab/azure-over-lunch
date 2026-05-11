@@ -10,6 +10,7 @@ export const ROUTES = {
   authCallback: '/auth/callback',
   dailyReview: '/learn/daily-review',
   billing: '/settings/billing',
+  admin: '/admin',
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
