@@ -4,6 +4,31 @@ import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { ROUTES } from '../../src/lib/routes';
 import { AuthProvider } from '../../src/lib/auth/AuthProvider';
 
+const makeQueryStub = () => {
+  const stub: Promise<{ data: never[]; error: null }> & {
+    select: () => typeof stub;
+    eq: () => typeof stub;
+    in: () => typeof stub;
+    single: () => typeof stub;
+    update: () => typeof stub;
+    delete: () => typeof stub;
+    neq: () => typeof stub;
+    insert: () => typeof stub;
+    upsert: () => typeof stub;
+  } = Object.assign(Promise.resolve({ data: [], error: null }), {
+    select: () => stub,
+    eq: () => stub,
+    in: () => stub,
+    single: () => stub,
+    update: () => stub,
+    delete: () => stub,
+    neq: () => stub,
+    insert: () => stub,
+    upsert: () => stub,
+  });
+  return stub;
+};
+
 vi.mock('../../src/lib/supabase', () => ({
   supabase: () => ({
     auth: {
@@ -11,6 +36,8 @@ vi.mock('../../src/lib/supabase', () => ({
       onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
       signOut: () => Promise.resolve({ error: null }),
     },
+    from: () => makeQueryStub(),
+    rpc: () => Promise.resolve({ data: null, error: null }),
   }),
 }));
 import { AppShell } from '../../src/components/AppShell';
