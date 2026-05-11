@@ -8,6 +8,7 @@ export const ROUTES = {
   settings: '/settings',
   signIn: '/sign-in',
   authCallback: '/auth/callback',
+  dailyReview: '/learn/daily-review',
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
