@@ -6,6 +6,8 @@ export const ROUTES = {
   productId: '/learn/product-id',
   progress: '/progress',
   settings: '/settings',
+  signIn: '/sign-in',
+  authCallback: '/auth/callback',
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;

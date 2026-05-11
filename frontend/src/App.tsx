@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ROUTES } from './lib/routes';
 import { ThemeProvider } from './lib/theme/ThemeProvider';
+import { AuthProvider } from './lib/auth/AuthProvider';
 import { AppShell } from './components/AppShell';
 import HomePage from './pages/HomePage';
 
@@ -11,6 +12,8 @@ const QuizPlaceholderPage = lazy(() => import('./pages/QuizPlaceholderPage'));
 const ProductIdPlaceholderPage = lazy(() => import('./pages/ProductIdPlaceholderPage'));
 const ProgressPage = lazy(() => import('./pages/ProgressPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const SignInPage = lazy(() => import('./pages/SignInPage'));
+const AuthCallbackPage = lazy(() => import('./pages/AuthCallbackPage'));
 
 function lazyPage(node: React.ReactNode) {
   return <Suspense fallback={<div className="p-4 text-fg-muted">Loading…</div>}>{node}</Suspense>;
@@ -27,6 +30,8 @@ const router = createBrowserRouter([
       { path: ROUTES.productId, element: lazyPage(<ProductIdPlaceholderPage />) },
       { path: ROUTES.progress, element: lazyPage(<ProgressPage />) },
       { path: ROUTES.settings, element: lazyPage(<SettingsPage />) },
+      { path: ROUTES.signIn, element: lazyPage(<SignInPage />) },
+      { path: ROUTES.authCallback, element: lazyPage(<AuthCallbackPage />) },
       {
         path: '*',
         element: (
@@ -42,8 +47,10 @@ const router = createBrowserRouter([
 
 export function App() {
   return (
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
