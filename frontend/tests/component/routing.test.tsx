@@ -1,0 +1,73 @@
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import { ROUTES } from '../../src/lib/routes';
+import { AppShell } from '../../src/components/AppShell';
+import HomePage from '../../src/pages/HomePage';
+import LearnIndexPage from '../../src/pages/LearnIndexPage';
+import FlashcardsPlaceholderPage from '../../src/pages/FlashcardsPlaceholderPage';
+import QuizPlaceholderPage from '../../src/pages/QuizPlaceholderPage';
+import ProductIdPlaceholderPage from '../../src/pages/ProductIdPlaceholderPage';
+import ProgressPage from '../../src/pages/ProgressPage';
+import SettingsPage from '../../src/pages/SettingsPage';
+
+function renderAt(path: string) {
+  const router = createMemoryRouter(
+    [
+      {
+        element: <AppShell />,
+        children: [
+          { path: ROUTES.home, element: <HomePage /> },
+          { path: ROUTES.learn, element: <LearnIndexPage /> },
+          { path: ROUTES.flashcards, element: <FlashcardsPlaceholderPage /> },
+          { path: ROUTES.quiz, element: <QuizPlaceholderPage /> },
+          { path: ROUTES.productId, element: <ProductIdPlaceholderPage /> },
+          { path: ROUTES.progress, element: <ProgressPage /> },
+          { path: ROUTES.settings, element: <SettingsPage /> },
+        ],
+      },
+    ],
+    { initialEntries: [path] },
+  );
+  return render(<RouterProvider router={router} />);
+}
+
+describe('Routing (FR-002, FR-003, FR-015)', () => {
+  it('renders the home page at /', () => {
+    renderAt(ROUTES.home);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Mobile-first prep/i);
+  });
+
+  it('renders the learn index at /learn', () => {
+    renderAt(ROUTES.learn);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Pick a mode/i);
+  });
+
+  it.each([
+    [ROUTES.flashcards, /Flashcards/i],
+    [ROUTES.quiz, /Quiz/i],
+    [ROUTES.productId, /Product ID/i],
+  ] as const)('renders placeholder page at %s (FR-003)', (path, heading) => {
+    renderAt(path);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(heading);
+    expect(screen.getByText(/Coming soon/i)).toBeInTheDocument();
+  });
+
+  it('renders the progress page at /progress', () => {
+    renderAt(ROUTES.progress);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Your progress/i);
+  });
+
+  it('renders the settings page at /settings', () => {
+    renderAt(ROUTES.settings);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Settings/i);
+  });
+
+  it('every primary route is in the bottom nav', () => {
+    renderAt(ROUTES.home);
+    const nav = screen.getByRole('navigation', { name: /primary/i });
+    for (const label of ['Home', 'Learn', 'Progress', 'Settings']) {
+      expect(nav).toHaveTextContent(label);
+    }
+  });
+});
