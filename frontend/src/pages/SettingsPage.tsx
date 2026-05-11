@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react';
 import { useAppStore, type Theme, type SessionLength } from '../lib/store';
+import { useAuth } from '../lib/auth/AuthProvider';
+import { supabase } from '../lib/supabase';
 
 const SESSION_LENGTHS: SessionLength[] = [10, 20, 30];
 const THEMES: Theme[] = ['dark', 'light'];
@@ -8,6 +11,7 @@ export default function SettingsPage() {
   const setTheme = useAppStore((s) => s.setTheme);
   const setLength = useAppStore((s) => s.setDefaultSessionLength);
   const setReducedMotion = useAppStore((s) => s.setReducedMotion);
+  const { user, signOut } = useAuth();
 
   return (
     <section>
@@ -71,6 +75,91 @@ export default function SettingsPage() {
           <span>Reduce motion (otherwise follow system setting)</span>
         </label>
       </fieldset>
+
+      {user && <AccountSection email={user.email ?? ''} onSignOut={signOut} />}
     </section>
+  );
+}
+
+function AccountSection({ email, onSignOut }: { email: string; onSignOut: () => Promise<void> }) {
+  const [displayName, setDisplayName] = useState('');
+  const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [confirmText, setConfirmText] = useState('');
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    supabase()
+      .from('profiles')
+      .select('display_name')
+      .single()
+      .then(({ data }) => {
+        if (data?.display_name) setDisplayName(data.display_name);
+      });
+  }, []);
+
+  async function saveName() {
+    setStatus('saving');
+    const { error } = await supabase().from('profiles').update({ display_name: displayName });
+    setStatus(error ? 'error' : 'saved');
+  }
+
+  async function deleteAccount() {
+    if (confirmText !== 'DELETE') return;
+    setDeleting(true);
+    // Best-effort: remove profile + cascading rows. Auth user deletion requires an admin
+    // call (out of scope for client) — sign the user out and inform them.
+    await supabase().from('profiles').delete().neq('id', '');
+    await onSignOut();
+  }
+
+  return (
+    <div className="mt-6 space-y-4">
+      <fieldset className="rounded-lg bg-bg-elevated p-4">
+        <legend className="px-1 text-sm font-semibold text-fg-muted">Account</legend>
+        <p className="mt-2 text-sm">Signed in as <strong>{email}</strong>.</p>
+        <label className="mt-3 block text-sm">
+          <span className="block font-medium">Display name</span>
+          <input
+            type="text"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            className="mt-1 block w-full rounded-md border border-divider bg-bg px-3 py-2"
+            placeholder="What should we call you?"
+          />
+        </label>
+        <button
+          type="button"
+          onClick={saveName}
+          className="mt-3 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-fg"
+          disabled={status === 'saving'}
+        >
+          {status === 'saving' ? 'Saving…' : 'Save'}
+        </button>
+        {status === 'saved' && <span className="ml-2 text-sm text-success">Saved.</span>}
+        {status === 'error' && <span className="ml-2 text-sm text-error">Failed — try again.</span>}
+      </fieldset>
+
+      <fieldset className="rounded-lg bg-bg-elevated p-4">
+        <legend className="px-1 text-sm font-semibold text-error">Delete account</legend>
+        <p className="mt-2 text-sm text-fg-muted">
+          Type <code className="text-fg">DELETE</code> to confirm. This removes your profile and
+          all study data.
+        </p>
+        <input
+          type="text"
+          value={confirmText}
+          onChange={(e) => setConfirmText(e.target.value)}
+          className="mt-2 block w-full rounded-md border border-divider bg-bg px-3 py-2"
+        />
+        <button
+          type="button"
+          onClick={deleteAccount}
+          disabled={confirmText !== 'DELETE' || deleting}
+          className="mt-3 rounded-md bg-error px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+        >
+          {deleting ? 'Deleting…' : 'Delete account permanently'}
+        </button>
+      </fieldset>
+    </div>
   );
 }

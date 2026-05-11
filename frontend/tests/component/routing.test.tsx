@@ -1,7 +1,18 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { ROUTES } from '../../src/lib/routes';
+import { AuthProvider } from '../../src/lib/auth/AuthProvider';
+
+vi.mock('../../src/lib/supabase', () => ({
+  supabase: () => ({
+    auth: {
+      getSession: () => Promise.resolve({ data: { session: null }, error: null }),
+      onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
+      signOut: () => Promise.resolve({ error: null }),
+    },
+  }),
+}));
 import { AppShell } from '../../src/components/AppShell';
 import HomePage from '../../src/pages/HomePage';
 import LearnIndexPage from '../../src/pages/LearnIndexPage';
@@ -29,7 +40,11 @@ function renderAt(path: string) {
     ],
     { initialEntries: [path] },
   );
-  return render(<RouterProvider router={router} />);
+  return render(
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>,
+  );
 }
 
 describe('Routing (FR-002, FR-003, FR-015)', () => {

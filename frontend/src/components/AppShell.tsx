@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { ROUTES } from '../lib/routes';
 import { PrivateModeWarning } from './PrivateModeWarning';
+import { ProfileMenu } from './ProfileMenu';
+import { MigrationPrompt } from './MigrationPrompt';
 
 const NAV = [
   { to: ROUTES.home, label: 'Home' },
@@ -19,9 +21,13 @@ export function AppShell() {
         Skip to content
       </a>
       <PrivateModeWarning />
-      <main id="main" className="flex-1 mx-auto w-full max-w-screen-md px-4 pt-4 pb-24">
+      <header className="mx-auto flex w-full max-w-screen-md items-center justify-end px-4 py-2">
+        <ProfileMenu />
+      </header>
+      <main id="main" className="flex-1 mx-auto w-full max-w-screen-md px-4 pb-24">
         <Outlet />
       </main>
+      <MigrationPrompt />
       <nav
         aria-label="Primary"
         className="sticky bottom-0 border-t border-divider bg-bg-elevated"
