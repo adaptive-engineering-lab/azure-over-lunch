@@ -23,3 +23,6 @@ coverage/
 # Supabase local data (Docker volume mounts)
 supabase/.branches/
 supabase/.temp/
+
+# Author drafts (committed via promote, not directly)
+tools/author/drafts/
