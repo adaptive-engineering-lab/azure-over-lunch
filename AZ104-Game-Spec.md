@@ -59,9 +59,16 @@ All personas share: **mobile-first usage**, **short study sessions (5–15 min)*
 |---|---|---|
 | Database | Supabase (Postgres) | Question bank, user progress, leaderboards |
 | Auth | Supabase Auth | Email/magic link or Google OAuth |
-| AI Layer | Anthropic Claude API (`claude-sonnet-4-20250514`) | Dynamic question generation, answer explanations |
-| Serverless Fns | Vercel Edge Functions | Proxy Claude API calls (hide API key) |
 | File Storage | Supabase Storage | Service icons/images for Product ID mode |
+
+### 3.2.1 Content Authoring Tooling (Offline, Not Runtime)
+
+| Layer | Technology | Rationale |
+|---|---|---|
+| Authoring AI | Anthropic Claude (developer-side) | Draft / refine / expand question bank entries during content production |
+| Authoring scripts | Local Node scripts under `tools/` | Generate JSON, validate schemas, seed Supabase |
+
+The production runtime makes **no** outbound calls to any AI provider. Claude is used by the maintainer to author content offline; the resulting JSON is reviewed by a human and committed to the seed bank before reaching users.
 
 ### 3.3 Hosting & DevOps
 
@@ -140,9 +147,10 @@ All personas share: **mobile-first usage**, **short study sessions (5–15 min)*
 }
 ```
 
-**AI Enhancement**:
-- If user exhausts the bank for a topic, Claude generates new cards on demand
-- Prompt includes domain, topic, difficulty level, and a list of already-seen card IDs to avoid repetition
+**Content Sourcing**:
+- All flashcards are pre-authored and seeded into Supabase
+- When a user exhausts the bank for a topic, the app cycles back through spaced-repetition cards rather than generating new ones at runtime
+- The maintainer uses Claude offline (see §7) to grow the bank between releases
 
 **UX Notes**:
 - Swipe left = Missed, swipe right = Got it (mobile gesture)
@@ -188,10 +196,10 @@ All personas share: **mobile-first usage**, **short study sessions (5–15 min)*
 }
 ```
 
-**AI Enhancement**:
-- Claude generates new MCQ questions for any topic on demand
-- Claude also generates **explanations** for bank questions that lack them
-- Post-quiz: user can tap "Explain more" → Claude gives a deeper breakdown
+**Content Sourcing**:
+- Questions and explanations are pre-authored and stored in Supabase
+- Every MCQ in the bank ships with its explanation; there is no runtime "generate explanation" path
+- "Explain more" is **not** a v1 feature; it is deferred until/unless a runtime AI tier is introduced
 
 **UX Notes**:
 - Timer shown as a shrinking progress ring around question number
@@ -240,35 +248,34 @@ All personas share: **mobile-first usage**, **short study sessions (5–15 min)*
 
 ---
 
-## 7. AI Integration
+## 7. AI-Assisted Content Authoring (Offline)
 
-### 7.1 Claude API Usage Patterns
+Claude is used **by the maintainer**, not by end users. The production app
+never calls an AI API. This section describes the authoring workflow.
 
-| Trigger | Prompt Type | Output |
-|---|---|---|
-| Question bank exhausted for a topic | Generation | 5–10 new MCQ or flashcard items (JSON) |
-| User answers incorrectly | Explanation | 2–3 sentence contextual explanation |
-| User taps "Explain more" | Deep dive | Paragraph explanation with example scenario |
-| Weekly review session | Weak area analysis | Summary of struggling topics + recommendations |
+### 7.1 Authoring Use Cases
 
-### 7.2 Prompt Design Principles
+| Use Case | Output |
+|---|---|
+| Draft new flashcards for an under-served topic | Batch of 5–10 JSON flashcard items |
+| Draft new MCQs with options + explanations | Batch of 5–10 JSON MCQ items |
+| Rewrite an explanation that learners flagged as unclear | Replacement explanation text |
+| Suggest "common confusions" for a Product-ID entry | List of 2–3 confusable services |
+
+### 7.2 Authoring Workflow
+
+1. Maintainer runs a local Node script under `tools/author/` that prompts Claude with: domain, topic, difficulty, existing item IDs to avoid, and the JSON schema.
+2. Claude returns JSON; the script validates against the schema in §8.
+3. Maintainer reviews each item, edits as needed, and commits the reviewed JSON to the seed file.
+4. A seed script writes the new items into Supabase with `source: "ai-generated"` and the human reviewer's initials.
+
+### 7.3 Prompt Design Principles
 
 - Always include: domain, topic, difficulty level, exam context ("AZ-104")
-- For generation: include list of existing question IDs to avoid duplicates
-- For explanations: include the question, all options, and the user's wrong answer
-- Temperature: `0.7` for generation, `0.3` for explanations (factual accuracy priority)
-- Always request JSON output for generation; plain text for explanations
-
-### 7.3 Serverless Function: `/api/ai`
-
-```
-POST /api/ai
-Body: { mode: "generate" | "explain" | "deep-dive", payload: {...} }
-Response: { content: string | QuestionItem[] }
-```
-
-- Rate limited: 20 AI calls per user per day (free tier)
-- Cached: identical prompts cached in Supabase for 7 days to reduce API cost
+- For generation: include existing item IDs to suppress duplicates
+- Temperature: `0.7` for generation, `0.3` for explanation rewrites
+- Always request JSON output for generation
+- No production rate limit applies; spend is bounded by maintainer usage
 
 ---
 
@@ -421,19 +428,16 @@ Questions sourced from:
 - [ ] User progress tracking
 - [ ] Streak + XP system
 
-### Phase 3 — AI Layer (Weeks 5–6)
-- [ ] Vercel Edge Function for Claude API proxy
-- [ ] AI-generated question generation (on bank exhaustion)
-- [ ] AI explanation on wrong answers
-- [ ] "Explain more" deep dive
-- [ ] Response caching in Supabase
-
-### Phase 4 — Polish & Launch (Weeks 7–8)
-- [ ] Full question bank (200 questions)
-- [ ] Dark mode + design refinement
-- [ ] PWA manifest + mobile install prompt
+### Phase 3 — Content & Personalization (Weeks 5–6)
+- [ ] Authoring scripts under `tools/author/` (Claude-assisted, schema-validated)
+- [ ] Full question bank seeded (200 questions, human-reviewed)
 - [ ] Spaced repetition ("Daily Review" mode)
 - [ ] Progress dashboard with radar chart
+
+### Phase 4 — Polish & Launch (Weeks 7–8)
+- [ ] Dark mode + design refinement
+- [ ] PWA manifest + mobile install prompt
+- [ ] Guest-mode → authenticated migration flow
 - [ ] Performance audit + Lighthouse score ≥ 90
 
 ---
@@ -450,13 +454,19 @@ Questions sourced from:
 
 ---
 
-## 15. Open Questions
+## 15. Resolved Decisions
 
-1. **Auth required?** Should users be able to play without signing up (guest mode with local storage progress)?
-2. **Pricing model?** Free with AI call limits, or paid tier for unlimited AI?
-3. **Official Microsoft icons?** Need to verify licensing for Azure icon set usage.
-4. **Localization?** English only for v1, or include French/Dutch given Belgian audience?
-5. **Accessibility?** Screen reader support priority level?
+Resolved 2026-05-11. Each item below was an open question in earlier drafts.
+
+1. **Auth model**: **Guest mode with local storage.** Anyone can start playing immediately; progress lives in localStorage. Optional sign-in (Supabase Auth) at any time migrates local progress into the user's profile. Implication: progress-storage layer must abstract over local vs. Supabase; sync/migration flow is a Phase 4 task.
+
+2. **Pricing**: **Free + paid "Pro" cosmetic tier (~$3/mo).** Free includes the full question bank and all four game modes. Pro unlocks themes, advanced stats, and exam-day countdown — non-essential features only. Implication: Stripe + entitlement plumbing added; v1 ships with one or two Pro features as proof of plumbing, more added post-launch. No paid feature blocks exam preparation.
+
+3. **Azure icons**: **Use the official Microsoft Azure icon set.** Subject to a licensing review against Microsoft's current terms before shipping; if terms forbid the use case at review time, fall back to a custom set. Action: legal/licensing check is a Phase 1 task and a release blocker.
+
+4. **Localization**: **English only for v1.** No i18n framework wired up; strings live inline. Revisit post-launch.
+
+5. **Accessibility**: **WCAG 2.1 AA on core flows.** "Core" = flashcards, MCQ quiz, product-ID, sign-in, and the guest-to-account migration. Settings, progress dashboard, and any admin/Pro-only screens are best-effort. Keyboard equivalents for every gesture are mandatory across the whole app (already in §10). Lighthouse Accessibility ≥ 90 (constitution Principle V) is the numerical gate.
 
 ---
 
