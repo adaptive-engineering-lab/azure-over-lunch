@@ -3,6 +3,8 @@ import { ROUTES } from '../lib/routes';
 import { PrivateModeWarning } from './PrivateModeWarning';
 import { ProfileMenu } from './ProfileMenu';
 import { MigrationPrompt } from './MigrationPrompt';
+import { InstallPrompt } from './InstallPrompt';
+import { OfflineIndicator } from './OfflineIndicator';
 
 const NAV = [
   { to: ROUTES.home, label: 'Home' },
@@ -21,6 +23,7 @@ export function AppShell() {
         Skip to content
       </a>
       <PrivateModeWarning />
+      <OfflineIndicator />
       <header className="mx-auto flex w-full max-w-screen-md items-center justify-end px-4 py-2">
         <ProfileMenu />
       </header>
@@ -28,6 +31,7 @@ export function AppShell() {
         <Outlet />
       </main>
       <MigrationPrompt />
+      <InstallPrompt />
       <nav
         aria-label="Primary"
         className="sticky bottom-0 border-t border-divider bg-bg-elevated"
