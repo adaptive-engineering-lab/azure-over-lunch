@@ -46,20 +46,18 @@ jobs:
           version: latest
 
       - name: Start local Supabase stack
+        # `supabase start` boots Postgres + Auth + Studio + etc. and applies
+        # every migration under supabase/migrations/ automatically.
         run: supabase start
-
-      - name: Apply migrations
-        # supabase start already applies migrations under supabase/migrations/;
-        # this is a defensive re-apply in case the CLI version's auto-apply
-        # behavior changes.
-        run: supabase db reset --linked=false
 
       - name: Export local Supabase keys
         run: |
-          status=$(supabase status --output json)
-          echo "SUPABASE_URL=$(echo "$status" | jq -r .API_URL)" >> "$GITHUB_ENV"
-          echo "SUPABASE_ANON_KEY=$(echo "$status" | jq -r .ANON_KEY)" >> "$GITHUB_ENV"
-          echo "SUPABASE_SERVICE_ROLE_KEY=$(echo "$status" | jq -r .SERVICE_ROLE_KEY)" >> "$GITHUB_ENV"
+          status=$(supabase status --output env)
+          # status is in `KEY="value"` form; eval it into the workflow env.
+          eval "$status"
+          echo "SUPABASE_URL=$API_URL" >> "$GITHUB_ENV"
+          echo "SUPABASE_ANON_KEY=$ANON_KEY" >> "$GITHUB_ENV"
+          echo "SUPABASE_SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY" >> "$GITHUB_ENV"
 
       - name: Validate seed content
         working-directory: tools
