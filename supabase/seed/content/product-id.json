@@ -1,0 +1,142 @@
+[
+  {
+    "id": "a3000000-pi00-4000-8000-000000000001",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "entra-id",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Microsoft Entra ID",
+      "category": "Identity",
+      "description": "Cloud-based identity and access management service providing SSO, MFA, conditional access, and identity governance for users, groups, and applications.",
+      "common_confusions": ["Azure AD B2C", "Microsoft Entra ID Governance"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-000000000002",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "azure-policy",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Policy",
+      "category": "Identity",
+      "description": "Service that enforces organizational standards by evaluating resources against rules and policies, denying non-compliant deployments or flagging existing resources for remediation.",
+      "common_confusions": ["Azure Blueprints", "Azure RBAC"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-000000000003",
+    "type": "product-id",
+    "domain": "storage",
+    "topic": "blob",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Blob Storage",
+      "category": "Storage",
+      "description": "Massively scalable object storage for unstructured data such as documents, images, videos, backups, and logs. Supports hot, cool, cold, and archive tiers.",
+      "common_confusions": ["Azure Files", "Azure Data Lake Storage Gen2"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-000000000004",
+    "type": "product-id",
+    "domain": "storage",
+    "topic": "azure-files",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Files",
+      "category": "Storage",
+      "description": "Fully managed file shares in the cloud accessible via SMB and NFS protocols. Used for lift-and-shift workloads, shared application settings, and cross-platform file access.",
+      "common_confusions": ["Azure NetApp Files", "Azure Blob Storage"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-000000000005",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "vm-scale-set",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Virtual Machine Scale Sets",
+      "category": "Compute",
+      "description": "Service for deploying and managing a group of identical, load-balanced VMs that automatically scale in or out based on demand or schedule.",
+      "common_confusions": ["Availability Sets", "Azure Kubernetes Service"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-000000000006",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "container-instances",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Container Instances",
+      "category": "Compute",
+      "description": "Run individual containers without managing servers or orchestrators. Per-second billing, fast startup, ideal for short-lived workloads, build agents, and event-driven tasks.",
+      "common_confusions": ["Azure Kubernetes Service", "Azure App Service"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-000000000007",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "bastion",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Bastion",
+      "category": "Networking",
+      "description": "Provides secure RDP and SSH access to virtual machines directly through the Azure portal over TLS, without exposing the VM's public IP address.",
+      "common_confusions": ["VPN Gateway", "Azure Firewall"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-000000000008",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "application-gateway",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Application Gateway",
+      "category": "Networking",
+      "description": "Layer-7 (HTTP/HTTPS) regional load balancer with URL-path routing, SSL termination, cookie-based session affinity, and an integrated Web Application Firewall.",
+      "common_confusions": ["Azure Front Door", "Azure Load Balancer"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-000000000009",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "log-analytics",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Log Analytics Workspace",
+      "category": "Monitoring",
+      "description": "Centralized data store and query engine for log and telemetry data from Azure resources and external systems. Queries are written in Kusto Query Language (KQL).",
+      "common_confusions": ["Application Insights", "Azure Data Explorer"]
+    }
+  },
+  {
+    "id": "a3000000-pi00-4000-8000-00000000000a",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "site-recovery",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Site Recovery",
+      "category": "Monitoring",
+      "description": "Disaster recovery service that replicates Azure VMs, on-prem VMs, and physical servers to a secondary region for orchestrated failover during region or datacenter outages.",
+      "common_confusions": ["Azure Backup", "Azure Migrate"]
+    }
+  }
+]
