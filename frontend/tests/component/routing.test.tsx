@@ -17,7 +17,7 @@ import { AppShell } from '../../src/components/AppShell';
 import HomePage from '../../src/pages/HomePage';
 import LearnIndexPage from '../../src/pages/LearnIndexPage';
 import FlashcardSelectPage from '../../src/pages/FlashcardSelectPage';
-import QuizPlaceholderPage from '../../src/pages/QuizPlaceholderPage';
+import QuizSelectPage from '../../src/pages/QuizSelectPage';
 import ProductIdPlaceholderPage from '../../src/pages/ProductIdPlaceholderPage';
 import ProgressPage from '../../src/pages/ProgressPage';
 import SettingsPage from '../../src/pages/SettingsPage';
@@ -31,7 +31,7 @@ function renderAt(path: string) {
           { path: ROUTES.home, element: <HomePage /> },
           { path: ROUTES.learn, element: <LearnIndexPage /> },
           { path: ROUTES.flashcards, element: <FlashcardSelectPage /> },
-          { path: ROUTES.quiz, element: <QuizPlaceholderPage /> },
+          { path: ROUTES.quiz, element: <QuizSelectPage /> },
           { path: ROUTES.productId, element: <ProductIdPlaceholderPage /> },
           { path: ROUTES.progress, element: <ProgressPage /> },
           { path: ROUTES.settings, element: <SettingsPage /> },
@@ -59,7 +59,6 @@ describe('Routing (FR-002, FR-003, FR-015)', () => {
   });
 
   it.each([
-    [ROUTES.quiz, /Quiz/i],
     [ROUTES.productId, /Product ID/i],
   ] as const)('renders placeholder page at %s (FR-003)', (path, heading) => {
     renderAt(path);

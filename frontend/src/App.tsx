@@ -9,7 +9,8 @@ import HomePage from './pages/HomePage';
 const LearnIndexPage = lazy(() => import('./pages/LearnIndexPage'));
 const FlashcardSelectPage = lazy(() => import('./pages/FlashcardSelectPage'));
 const FlashcardSessionPage = lazy(() => import('./pages/FlashcardSessionPage'));
-const QuizPlaceholderPage = lazy(() => import('./pages/QuizPlaceholderPage'));
+const QuizSelectPage = lazy(() => import('./pages/QuizSelectPage'));
+const QuizSessionPage = lazy(() => import('./pages/QuizSessionPage'));
 const ProductIdPlaceholderPage = lazy(() => import('./pages/ProductIdPlaceholderPage'));
 const ProgressPage = lazy(() => import('./pages/ProgressPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
       { path: ROUTES.learn, element: lazyPage(<LearnIndexPage />) },
       { path: ROUTES.flashcards, element: lazyPage(<FlashcardSelectPage />) },
       { path: `${ROUTES.flashcards}/session`, element: lazyPage(<FlashcardSessionPage />) },
-      { path: ROUTES.quiz, element: lazyPage(<QuizPlaceholderPage />) },
+      { path: ROUTES.quiz, element: lazyPage(<QuizSelectPage />) },
+      { path: `${ROUTES.quiz}/session`, element: lazyPage(<QuizSessionPage />) },
       { path: ROUTES.productId, element: lazyPage(<ProductIdPlaceholderPage />) },
       { path: ROUTES.progress, element: lazyPage(<ProgressPage />) },
       { path: ROUTES.settings, element: lazyPage(<SettingsPage />) },
