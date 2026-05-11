@@ -18,7 +18,7 @@ import HomePage from '../../src/pages/HomePage';
 import LearnIndexPage from '../../src/pages/LearnIndexPage';
 import FlashcardSelectPage from '../../src/pages/FlashcardSelectPage';
 import QuizSelectPage from '../../src/pages/QuizSelectPage';
-import ProductIdPlaceholderPage from '../../src/pages/ProductIdPlaceholderPage';
+import ProductIdPage from '../../src/pages/ProductIdPage';
 import ProgressPage from '../../src/pages/ProgressPage';
 import SettingsPage from '../../src/pages/SettingsPage';
 
@@ -32,7 +32,7 @@ function renderAt(path: string) {
           { path: ROUTES.learn, element: <LearnIndexPage /> },
           { path: ROUTES.flashcards, element: <FlashcardSelectPage /> },
           { path: ROUTES.quiz, element: <QuizSelectPage /> },
-          { path: ROUTES.productId, element: <ProductIdPlaceholderPage /> },
+          { path: ROUTES.productId, element: <ProductIdPage /> },
           { path: ROUTES.progress, element: <ProgressPage /> },
           { path: ROUTES.settings, element: <SettingsPage /> },
         ],
@@ -58,18 +58,15 @@ describe('Routing (FR-002, FR-003, FR-015)', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Pick a mode/i);
   });
 
-  it.each([
-    [ROUTES.productId, /Product ID/i],
-  ] as const)('renders placeholder page at %s (FR-003)', (path, heading) => {
-    renderAt(path);
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(heading);
-    expect(screen.getByText(/Coming soon/i)).toBeInTheDocument();
-  });
-
   it('renders the flashcards select page at /learn/flashcards', () => {
     renderAt(ROUTES.flashcards);
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Flashcards/i);
     expect(screen.getByText(/Pick a topic/i)).toBeInTheDocument();
+  });
+
+  it('renders the product-id page at /learn/product-id', () => {
+    renderAt(ROUTES.productId);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Product ID/i);
   });
 
   it('renders the progress page at /progress', () => {
