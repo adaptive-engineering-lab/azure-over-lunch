@@ -9,6 +9,7 @@ export const ROUTES = {
   signIn: '/sign-in',
   authCallback: '/auth/callback',
   dailyReview: '/learn/daily-review',
+  billing: '/settings/billing',
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;
