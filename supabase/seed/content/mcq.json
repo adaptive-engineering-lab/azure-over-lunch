@@ -1,0 +1,477 @@
+[
+  {
+    "id": "a2000000-cc00-4000-8000-000000000001",
+    "type": "mcq",
+    "domain": "identity-governance",
+    "topic": "rbac",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "Which built-in RBAC role allows a user to manage all Azure resources in a subscription but NOT grant access to others?",
+      "options": {
+        "A": "Owner",
+        "B": "Contributor",
+        "C": "Reader",
+        "D": "User Access Administrator"
+      },
+      "correct": "B",
+      "explanation": "Contributor has full management permissions on resources but cannot assign roles. Owner includes Contributor plus role-assignment rights. User Access Administrator can manage access but not the resources themselves. Reader has read-only access."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000002",
+    "type": "mcq",
+    "domain": "identity-governance",
+    "topic": "conditional-access",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "You want to require multi-factor authentication only when users sign in from outside the corporate network. What should you configure?",
+      "options": {
+        "A": "An Entra ID Conditional Access policy with a named-location condition",
+        "B": "A per-user MFA setting in the Entra ID portal",
+        "C": "An Azure Policy with the 'requireMfa' effect",
+        "D": "A Network Security Group rule blocking external IPs"
+      },
+      "correct": "A",
+      "explanation": "Conditional Access policies are the modern, granular control for sign-in requirements. A named location defines trusted IP ranges; the policy grants access unconditionally inside and requires MFA outside. Per-user MFA always requires MFA regardless of location. Azure Policy governs resource configuration, not sign-in. NSGs do not affect Entra ID authentication."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000003",
+    "type": "mcq",
+    "domain": "identity-governance",
+    "topic": "management-groups",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "Your organization has 30 subscriptions. You want to apply one Azure Policy to all of them. What is the most efficient way?",
+      "options": {
+        "A": "Assign the policy to each subscription individually",
+        "B": "Assign the policy at the tenant root management group",
+        "C": "Assign the policy to a resource group in each subscription",
+        "D": "Create a custom RBAC role that includes the policy"
+      },
+      "correct": "B",
+      "explanation": "Management groups let you apply policies and RBAC across many subscriptions at once. Assigning at the tenant root group propagates the policy to every subscription beneath it. Per-subscription assignment is tedious and drifts over time. Resource-group scope is too narrow. RBAC roles do not contain policies."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000004",
+    "type": "mcq",
+    "domain": "identity-governance",
+    "topic": "resource-locks",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "question": "Which lock level prevents a resource from being deleted but still allows modifications?",
+      "options": {
+        "A": "CanNotDelete",
+        "B": "ReadOnly",
+        "C": "NotDelete",
+        "D": "Restricted"
+      },
+      "correct": "A",
+      "explanation": "CanNotDelete blocks delete operations but permits reads and updates. ReadOnly blocks both deletes and modifications. 'NotDelete' and 'Restricted' are not valid Azure lock levels."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000005",
+    "type": "mcq",
+    "domain": "identity-governance",
+    "topic": "groups",
+    "difficulty": 3,
+    "source": "bank",
+    "content": {
+      "question": "You need a group whose membership is automatically updated based on user attributes (department, country). Which group type should you create?",
+      "options": {
+        "A": "Security group, Assigned membership",
+        "B": "Microsoft 365 group, Assigned membership",
+        "C": "Security group, Dynamic User membership",
+        "D": "Distribution group"
+      },
+      "correct": "C",
+      "explanation": "Dynamic User membership uses rules over user properties to auto-populate the group. 'Assigned' requires manual additions. Microsoft 365 groups also support dynamic membership but are designed for collaboration (mailbox, SharePoint site) — for RBAC and Conditional Access scoping a security group is the correct type."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000006",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "blob-tiers",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "What is the minimum storage duration before you can move a blob from Cool to Hot without incurring an early-deletion fee?",
+      "options": {
+        "A": "30 days",
+        "B": "90 days",
+        "C": "180 days",
+        "D": "There is no minimum"
+      },
+      "correct": "A",
+      "explanation": "Cool tier requires a 30-day minimum storage duration; moving or deleting earlier incurs a pro-rated early-deletion charge. Archive's minimum is 180 days. Hot has no minimum. The 90-day figure is not an Azure Blob tier minimum."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000007",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "azure-files",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "Which protocol is supported by Azure Files for mounting on Linux VMs in the same region?",
+      "options": {
+        "A": "SMB only",
+        "B": "NFS only",
+        "C": "Both SMB and NFS",
+        "D": "iSCSI"
+      },
+      "correct": "C",
+      "explanation": "Azure Files supports SMB 2.1/3.0+ across all tiers and NFS 4.1 on premium file shares. Linux can mount either, though NFS requires the premium tier and a private endpoint or service-endpoint-secured VNet. iSCSI is not an Azure Files protocol."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000008",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "lifecycle",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "You want blobs in a container to move from Hot to Cool after 30 days of inactivity and be deleted after 365 days. What Azure feature implements this?",
+      "options": {
+        "A": "An Azure Policy with the auditIfNotExists effect",
+        "B": "A storage account lifecycle management policy",
+        "C": "A Logic App triggered by Event Grid",
+        "D": "A custom Azure Function on a timer trigger"
+      },
+      "correct": "B",
+      "explanation": "Lifecycle management policies on the storage account define rules that tier or delete blobs based on age or last-access time — exactly the built-in feature for this scenario. The other options would work but are unnecessary complexity when a first-party feature exists."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000009",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "sas-tokens",
+    "difficulty": 3,
+    "source": "bank",
+    "content": {
+      "question": "Which SAS type lets you revoke access before its expiry without rotating the storage account key?",
+      "options": {
+        "A": "Account SAS",
+        "B": "Ad-hoc Service SAS",
+        "C": "Service SAS with a stored access policy",
+        "D": "User Delegation SAS"
+      },
+      "correct": "C",
+      "explanation": "A Service SAS that references a stored access policy can be revoked by deleting or modifying the policy on the container. Ad-hoc SAS (no policy) and account SAS can only be revoked by rotating the account key. User Delegation SAS can be revoked by revoking the user-delegation key, but it's signed with Entra ID credentials and requires that authentication path."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-00000000000a",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "redundancy",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "Your storage account is configured as GRS. Your application reads from this account. Where does it read from during normal operations?",
+      "options": {
+        "A": "The primary region",
+        "B": "The secondary region",
+        "C": "Whichever region is closest to the client",
+        "D": "Both regions, with the response merged"
+      },
+      "correct": "A",
+      "explanation": "GRS replicates asynchronously to a paired secondary region but the secondary is not accessible to the application unless you fail over. To read from the secondary during normal operations you need RA-GRS (Read-Access GRS), which exposes a separate endpoint."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-00000000000b",
+    "type": "mcq",
+    "domain": "compute",
+    "topic": "vm-sku",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "You need to resize a running VM from Standard_D2s_v5 to Standard_D8s_v5. What is the impact?",
+      "options": {
+        "A": "The VM resizes online with no interruption",
+        "B": "The VM restarts; ephemeral OS disk data is lost",
+        "C": "The VM restarts but managed disks and data are preserved",
+        "D": "The resize fails because the SKUs differ in size"
+      },
+      "correct": "C",
+      "explanation": "Resizing a VM to a different size within the same series or a compatible family requires a restart but preserves the managed OS and data disks. Ephemeral OS disks are an exception — they're recreated from the image — so applications using them must tolerate that. The D-series resize is supported."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-00000000000c",
+    "type": "mcq",
+    "domain": "compute",
+    "topic": "scale-sets",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "A Virtual Machine Scale Set uses Manual scaling, currently at 3 instances. You change the desired count to 5. What happens?",
+      "options": {
+        "A": "Two new instances are provisioned and added to the load balancer",
+        "B": "The scale set scales when the next autoscale evaluation runs",
+        "C": "Nothing — Manual scaling ignores count changes",
+        "D": "All 5 instances are recreated from the template"
+      },
+      "correct": "A",
+      "explanation": "Manual scaling sets a fixed instance count; changing the count immediately provisions or deprovisions instances to match. Autoscale is a different scaling mode entirely (rule-based). Existing instances are not recreated by a count change."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-00000000000d",
+    "type": "mcq",
+    "domain": "compute",
+    "topic": "app-service",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "You want App Service slots for blue-green deployment. What is the minimum pricing tier that supports deployment slots?",
+      "options": {
+        "A": "Free",
+        "B": "Basic",
+        "C": "Standard",
+        "D": "Premium"
+      },
+      "correct": "C",
+      "explanation": "Deployment slots are available starting from the Standard tier (5 slots), and increase in higher tiers (Premium V2: 20 slots, Premium V3: 20). Free and Basic do not support slots."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-00000000000e",
+    "type": "mcq",
+    "domain": "compute",
+    "topic": "containers",
+    "difficulty": 3,
+    "source": "bank",
+    "content": {
+      "question": "When should you choose Azure Container Instances (ACI) over Azure Kubernetes Service (AKS)?",
+      "options": {
+        "A": "When you need a managed Kubernetes API",
+        "B": "When you need short-lived or burst workloads without orchestrator overhead",
+        "C": "When you need rolling updates with canary deployments",
+        "D": "When you need to run more than 100 containers in production"
+      },
+      "correct": "B",
+      "explanation": "ACI gives per-second-billed serverless containers with no orchestrator to manage — ideal for batch jobs, build agents, or burst workloads. AKS is appropriate when you need orchestration (deployments, services, ingress), multi-pod scaling, or a Kubernetes API surface for your team's tooling."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-00000000000f",
+    "type": "mcq",
+    "domain": "compute",
+    "topic": "availability",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "Two VMs are placed in the same Availability Set. Which of the following is guaranteed?",
+      "options": {
+        "A": "They run in different Azure regions",
+        "B": "They run in different availability zones",
+        "C": "They run on different physical racks (fault domains)",
+        "D": "They run on identical host hardware"
+      },
+      "correct": "C",
+      "explanation": "Availability Sets distribute VMs across fault domains (different racks, network, and power) and update domains (different maintenance batches) within a single datacenter. They do not span zones or regions. Identical hardware is neither guaranteed nor relevant to the high-availability guarantee."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000010",
+    "type": "mcq",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "An NSG has two rules: Rule 100 'Allow TCP 443 from any' and Rule 200 'Deny TCP 443 from 10.0.0.0/24'. A packet arrives from 10.0.0.5 on TCP 443. What happens?",
+      "options": {
+        "A": "Denied — lower-numbered rule takes precedence only when it's a deny",
+        "B": "Allowed — Rule 100 has lower priority number, so it is evaluated first",
+        "C": "Denied — explicit deny always wins",
+        "D": "Allowed — the more specific rule applies"
+      },
+      "correct": "B",
+      "explanation": "NSG rules are evaluated in priority order, lowest number first. The first matching rule is applied and evaluation stops. Rule 100 matches and allows the packet; Rule 200 is never evaluated. To get the deny behavior, the deny rule must have a priority lower than 100."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000011",
+    "type": "mcq",
+    "domain": "networking",
+    "topic": "bastion",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "question": "What is the main benefit of using Azure Bastion to connect to a VM?",
+      "options": {
+        "A": "Faster RDP/SSH throughput than a public IP",
+        "B": "Browser-based RDP/SSH access without exposing the VM's public IP",
+        "C": "Free regional egress for VM traffic",
+        "D": "Automatic just-in-time access controls"
+      },
+      "correct": "B",
+      "explanation": "Azure Bastion provides RDP/SSH connectivity from the Azure portal over TLS, removing the need to expose VMs via public IPs or open inbound 3389/22. Just-in-time access (B in option D) is a Defender for Cloud feature, complementary to Bastion."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000012",
+    "type": "mcq",
+    "domain": "networking",
+    "topic": "load-balancer",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "You need to route HTTPS traffic to different backend pools based on the URL path (/api → API VMs, /web → Web VMs). Which service?",
+      "options": {
+        "A": "Azure Load Balancer (Standard)",
+        "B": "Azure Application Gateway",
+        "C": "Azure Front Door",
+        "D": "Azure Traffic Manager"
+      },
+      "correct": "B",
+      "explanation": "Application Gateway is a regional Layer-7 load balancer with URL path-based routing — exactly the scenario. Azure Load Balancer operates at Layer 4 (TCP/UDP) and cannot inspect URLs. Front Door is global and also Layer 7 but is typically used for multi-region web traffic. Traffic Manager is DNS-based and does not perform path routing."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000013",
+    "type": "mcq",
+    "domain": "networking",
+    "topic": "private-endpoint",
+    "difficulty": 3,
+    "source": "bank",
+    "content": {
+      "question": "You configure a Private Endpoint for a storage account in your VNet. What additional setting must you ensure for traffic from the VM to use the private IP?",
+      "options": {
+        "A": "Open inbound port 443 in the NSG",
+        "B": "Update the VM's DNS to resolve the storage FQDN to the private IP (via Private DNS zone or hosts file)",
+        "C": "Disable the public endpoint on the storage account",
+        "D": "Peer the VNet with the Microsoft network"
+      },
+      "correct": "B",
+      "explanation": "A Private Endpoint creates a private IP, but the storage account's public FQDN still resolves to a public IP by default. You link a Private DNS zone (privatelink.blob.core.windows.net) to the VNet so the FQDN resolves to the private IP. Disabling the public endpoint is good security practice but not required for the private IP to be used by clients that resolve the FQDN to it."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000014",
+    "type": "mcq",
+    "domain": "networking",
+    "topic": "vpn-gateway",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "You want highly available site-to-site connectivity from on-prem to Azure. Which VPN Gateway SKU is the minimum that supports active-active and BGP?",
+      "options": {
+        "A": "Basic",
+        "B": "VpnGw1",
+        "C": "VpnGw1AZ",
+        "D": "Standard"
+      },
+      "correct": "B",
+      "explanation": "VpnGw1 (and higher) supports BGP and active-active configurations. The Basic SKU does not support BGP, active-active, or zone redundancy. VpnGw1AZ also works but isn't the *minimum* — it adds zone redundancy on top of VpnGw1's feature set. 'Standard' is a legacy SKU name no longer in standard naming."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000015",
+    "type": "mcq",
+    "domain": "monitoring",
+    "topic": "log-analytics",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "You want to send diagnostic logs from an Azure SQL Database to a Log Analytics workspace for querying. Which feature do you configure on the database?",
+      "options": {
+        "A": "A diagnostic setting",
+        "B": "Azure Monitor Metrics export",
+        "C": "Application Insights instrumentation key",
+        "D": "An action group"
+      },
+      "correct": "A",
+      "explanation": "Diagnostic settings route platform logs and metrics from a resource to one or more destinations: a Log Analytics workspace, an Event Hub, or a Storage Account. Application Insights is for application-layer telemetry. Action groups are notification targets for alerts. Metrics export refers to a different mechanism (Azure Data Explorer)."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000016",
+    "type": "mcq",
+    "domain": "monitoring",
+    "topic": "alerts",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "You want to receive a Microsoft Teams notification when a Log Analytics query returns more than 5 errors in 10 minutes. What is the simplest setup?",
+      "options": {
+        "A": "A metric alert with a static threshold",
+        "B": "A log alert (search rule) with an action group that has a webhook to Teams",
+        "C": "An Activity Log alert with an email notification",
+        "D": "An Azure Function that polls the workspace"
+      },
+      "correct": "B",
+      "explanation": "Log alerts run a saved KQL query on a schedule and fire when results match the criteria. Action groups support webhooks (including Teams) and many other notification types. Metric alerts work over numeric metric streams, not log queries. Activity Log alerts fire on subscription-level events. A custom Function is unnecessary work."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000017",
+    "type": "mcq",
+    "domain": "monitoring",
+    "topic": "backup",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "question": "What is the maximum frequency at which an Azure VM can be backed up using the standard Azure Backup policy (not enhanced)?",
+      "options": {
+        "A": "Every hour",
+        "B": "Every 4 hours",
+        "C": "Once per day",
+        "D": "Every 15 minutes"
+      },
+      "correct": "C",
+      "explanation": "Standard Azure VM backup policies support daily and weekly schedules — once per day is the maximum. The enhanced backup policy (introduced for Trusted Launch VMs and others) supports multiple snapshots per day, but the question specifies standard."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000018",
+    "type": "mcq",
+    "domain": "monitoring",
+    "topic": "metrics",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "question": "How long are Azure Monitor platform metrics retained by default at no extra cost?",
+      "options": {
+        "A": "7 days",
+        "B": "30 days",
+        "C": "93 days",
+        "D": "1 year"
+      },
+      "correct": "C",
+      "explanation": "Platform metrics are retained for 93 days at no extra cost. To retain them longer or perform complex analysis, export them to a Log Analytics workspace, Event Hub, or Storage Account via a diagnostic setting."
+    }
+  },
+  {
+    "id": "a2000000-cc00-4000-8000-000000000019",
+    "type": "mcq",
+    "domain": "monitoring",
+    "topic": "site-recovery",
+    "difficulty": 3,
+    "source": "bank",
+    "content": {
+      "question": "Azure Site Recovery replicates a VM from East US to West US. What is the typical RPO for VM replication?",
+      "options": {
+        "A": "Continuous (zero RPO)",
+        "B": "Approximately 30 seconds to a few minutes",
+        "C": "1 hour",
+        "D": "24 hours"
+      },
+      "correct": "B",
+      "explanation": "ASR uses near-continuous replication with a typical RPO of approximately 30 seconds to a few minutes depending on workload and disk-change rate. Zero RPO requires synchronous replication, which ASR does not perform across regions. Hour or day RPOs are characteristic of backup, not DR replication."
+    }
+  }
+]

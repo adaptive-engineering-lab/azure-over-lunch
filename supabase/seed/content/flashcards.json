@@ -1,0 +1,182 @@
+[
+  {
+    "id": "a1000000-fc00-4000-8000-000000000001",
+    "type": "flashcard",
+    "domain": "identity-governance",
+    "topic": "rbac",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "front": "What is the principle of least privilege in Azure RBAC?",
+      "back": "Granting users, groups, and service principals only the permissions necessary to perform their tasks — no more. In Azure this is implemented by assigning the lowest-privilege built-in or custom role at the narrowest scope (resource > resource group > subscription > management group)."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-000000000002",
+    "type": "flashcard",
+    "domain": "identity-governance",
+    "topic": "entra-id",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "front": "What is Microsoft Entra ID?",
+      "back": "Microsoft's cloud-based identity and access management service (formerly Azure Active Directory). It provides authentication, SSO, conditional access, multi-factor authentication, and identity governance for cloud and on-premises resources."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-000000000003",
+    "type": "flashcard",
+    "domain": "identity-governance",
+    "topic": "azure-policy",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "front": "What is the difference between Azure Policy and Azure RBAC?",
+      "back": "RBAC controls *who* can perform actions on resources (authorization). Azure Policy controls *what* resources can be created and how they must be configured (governance / compliance). RBAC says 'you may deploy a VM'; Policy says 'any VM you deploy must use approved SKUs and have disk encryption enabled.'"
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-000000000004",
+    "type": "flashcard",
+    "domain": "storage",
+    "topic": "blob-tiers",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "front": "Name the three Azure Blob access tiers and when you'd use each.",
+      "back": "Hot — frequently accessed data, highest storage cost, lowest access cost. Cool — infrequently accessed, lower storage cost, higher access cost, 30-day minimum. Archive — rarely accessed, lowest storage cost, highest access cost and latency (rehydrate before reading), 180-day minimum."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-000000000005",
+    "type": "flashcard",
+    "domain": "storage",
+    "topic": "redundancy",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "front": "Compare LRS, ZRS, GRS, and RA-GRS storage redundancy.",
+      "back": "LRS — 3 copies in one datacenter; cheapest, no zone or region fault tolerance. ZRS — 3 copies across availability zones in one region; zone fault tolerant. GRS — LRS plus async copy to a paired secondary region (read access only on failover). RA-GRS — GRS where the secondary is always readable."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-000000000006",
+    "type": "flashcard",
+    "domain": "storage",
+    "topic": "sas-tokens",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "front": "What is a Shared Access Signature (SAS) and when should you use a stored access policy?",
+      "back": "A SAS is a signed URL that grants time-limited, scoped access to storage resources without sharing the account key. Use a stored access policy when you want to revoke a SAS before it expires — revoking the policy invalidates all SAS tokens that reference it; ad-hoc SAS tokens can only be invalidated by rotating the account key."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-000000000007",
+    "type": "flashcard",
+    "domain": "compute",
+    "topic": "availability",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "front": "Availability Set vs. Availability Zone — what's the SLA difference?",
+      "back": "Availability Set: VMs spread across fault and update domains within a single datacenter — 99.95% SLA, protects against rack-level failures. Availability Zone: VMs spread across physically separate datacenters within a region — 99.99% SLA, protects against datacenter-level failures."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-000000000008",
+    "type": "flashcard",
+    "domain": "compute",
+    "topic": "scale-sets",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "front": "What does a Virtual Machine Scale Set give you that a single VM doesn't?",
+      "back": "Automatic horizontal scaling (scale out/in based on metrics or schedule), load distribution across identical VM instances, automatic OS-image-based rollouts/rollbacks, and built-in integration with Azure Load Balancer or Application Gateway. All instances share one configuration template."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-000000000009",
+    "type": "flashcard",
+    "domain": "compute",
+    "topic": "app-service",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "front": "What is an App Service Plan and what determines its cost?",
+      "back": "An App Service Plan defines the compute (region, OS, instance size, instance count, tier) that hosts one or more App Service apps. Cost is determined by the pricing tier (Free, Shared, Basic, Standard, Premium, Isolated) and the number of instances — not by the number of apps in the plan."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-00000000000a",
+    "type": "flashcard",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "front": "What is a Network Security Group (NSG)?",
+      "back": "A stateful, layer-3/4 firewall that filters inbound and outbound traffic to Azure resources. Rules are evaluated by priority (lowest number first), allow/deny by source/destination IP, port, and protocol. An NSG can be attached to a subnet, a NIC, or both."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-00000000000b",
+    "type": "flashcard",
+    "domain": "networking",
+    "topic": "vnet-peering",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "front": "What is VNet peering and is it transitive?",
+      "back": "VNet peering connects two VNets so resources can communicate as if they were in the same VNet, using the Microsoft backbone (no public internet). It is **not transitive**: if A peers with B and B peers with C, A cannot reach C directly — you must either peer A↔C or route through a transit hub (e.g., Azure Firewall, VPN/ER gateway in B)."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-00000000000c",
+    "type": "flashcard",
+    "domain": "networking",
+    "topic": "load-balancer",
+    "difficulty": 3,
+    "source": "bank",
+    "content": {
+      "front": "When would you pick Azure Application Gateway over Azure Load Balancer?",
+      "back": "Application Gateway is a layer-7 (HTTP/HTTPS) load balancer with URL-based routing, SSL termination, cookie-based session affinity, and a built-in WAF. Use it for web traffic that needs path-based routing, host-header routing, or WAF protection. Azure Load Balancer is layer-4 (TCP/UDP) — faster and cheaper for non-HTTP workloads or pure transport-layer balancing."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-00000000000d",
+    "type": "flashcard",
+    "domain": "monitoring",
+    "topic": "log-analytics",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "front": "What is a Log Analytics workspace?",
+      "back": "A centralized data store for log and telemetry data from Azure resources, on-premises systems, and other clouds. It's the storage and query engine behind Azure Monitor — KQL (Kusto Query Language) queries run against workspaces to investigate issues, build alerts, and feed workbooks/dashboards."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-00000000000e",
+    "type": "flashcard",
+    "domain": "monitoring",
+    "topic": "alerts",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "front": "What are the three core components of an Azure Monitor alert rule?",
+      "back": "1) Scope — what resource(s) the rule monitors. 2) Condition — the signal and threshold (metric, log query, activity log event, etc.) that triggers the alert. 3) Action group — the notifications/automations to run when the condition is met (email, SMS, webhook, Logic App, Function, runbook)."
+    }
+  },
+  {
+    "id": "a1000000-fc00-4000-8000-00000000000f",
+    "type": "flashcard",
+    "domain": "monitoring",
+    "topic": "backup",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "front": "What is the difference between a Recovery Services vault and a Backup vault?",
+      "back": "Recovery Services vault — older service supporting Azure VM backup, Azure Files backup, on-prem agent backup, SQL in Azure VM, and Azure Site Recovery (DR). Backup vault — newer service for managed-disk, blob, PostgreSQL, Kubernetes, and Azure Database for PostgreSQL backups. Each workload type maps to one vault type; you cannot mix."
+    }
+  }
+]
