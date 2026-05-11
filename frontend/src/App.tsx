@@ -7,7 +7,8 @@ import { AppShell } from './components/AppShell';
 import HomePage from './pages/HomePage';
 
 const LearnIndexPage = lazy(() => import('./pages/LearnIndexPage'));
-const FlashcardsPlaceholderPage = lazy(() => import('./pages/FlashcardsPlaceholderPage'));
+const FlashcardSelectPage = lazy(() => import('./pages/FlashcardSelectPage'));
+const FlashcardSessionPage = lazy(() => import('./pages/FlashcardSessionPage'));
 const QuizPlaceholderPage = lazy(() => import('./pages/QuizPlaceholderPage'));
 const ProductIdPlaceholderPage = lazy(() => import('./pages/ProductIdPlaceholderPage'));
 const ProgressPage = lazy(() => import('./pages/ProgressPage'));
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
     children: [
       { path: ROUTES.home, element: <HomePage /> },
       { path: ROUTES.learn, element: lazyPage(<LearnIndexPage />) },
-      { path: ROUTES.flashcards, element: lazyPage(<FlashcardsPlaceholderPage />) },
+      { path: ROUTES.flashcards, element: lazyPage(<FlashcardSelectPage />) },
+      { path: `${ROUTES.flashcards}/session`, element: lazyPage(<FlashcardSessionPage />) },
       { path: ROUTES.quiz, element: lazyPage(<QuizPlaceholderPage />) },
       { path: ROUTES.productId, element: lazyPage(<ProductIdPlaceholderPage />) },
       { path: ROUTES.progress, element: lazyPage(<ProgressPage />) },

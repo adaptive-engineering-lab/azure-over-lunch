@@ -16,7 +16,7 @@ vi.mock('../../src/lib/supabase', () => ({
 import { AppShell } from '../../src/components/AppShell';
 import HomePage from '../../src/pages/HomePage';
 import LearnIndexPage from '../../src/pages/LearnIndexPage';
-import FlashcardsPlaceholderPage from '../../src/pages/FlashcardsPlaceholderPage';
+import FlashcardSelectPage from '../../src/pages/FlashcardSelectPage';
 import QuizPlaceholderPage from '../../src/pages/QuizPlaceholderPage';
 import ProductIdPlaceholderPage from '../../src/pages/ProductIdPlaceholderPage';
 import ProgressPage from '../../src/pages/ProgressPage';
@@ -30,7 +30,7 @@ function renderAt(path: string) {
         children: [
           { path: ROUTES.home, element: <HomePage /> },
           { path: ROUTES.learn, element: <LearnIndexPage /> },
-          { path: ROUTES.flashcards, element: <FlashcardsPlaceholderPage /> },
+          { path: ROUTES.flashcards, element: <FlashcardSelectPage /> },
           { path: ROUTES.quiz, element: <QuizPlaceholderPage /> },
           { path: ROUTES.productId, element: <ProductIdPlaceholderPage /> },
           { path: ROUTES.progress, element: <ProgressPage /> },
@@ -59,13 +59,18 @@ describe('Routing (FR-002, FR-003, FR-015)', () => {
   });
 
   it.each([
-    [ROUTES.flashcards, /Flashcards/i],
     [ROUTES.quiz, /Quiz/i],
     [ROUTES.productId, /Product ID/i],
   ] as const)('renders placeholder page at %s (FR-003)', (path, heading) => {
     renderAt(path);
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(heading);
     expect(screen.getByText(/Coming soon/i)).toBeInTheDocument();
+  });
+
+  it('renders the flashcards select page at /learn/flashcards', () => {
+    renderAt(ROUTES.flashcards);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Flashcards/i);
+    expect(screen.getByText(/Pick a topic/i)).toBeInTheDocument();
   });
 
   it('renders the progress page at /progress', () => {
