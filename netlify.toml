@@ -5,7 +5,8 @@
 [build]
   base    = "frontend"
   command = "corepack enable && pnpm install --frozen-lockfile && pnpm build"
-  publish = "frontend/dist"
+  # `publish` is resolved relative to `base`, so this becomes frontend/dist.
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
