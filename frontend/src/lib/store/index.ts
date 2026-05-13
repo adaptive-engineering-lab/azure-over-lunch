@@ -42,6 +42,7 @@ interface AppState {
 
   addXp: (delta: number) => void;
   bumpStreakIfDue: (today?: Date) => void;
+  hydrateFromServer: (input: { progress: GuestProgressMap; sessions: GuestSession[] }) => void;
   reset: () => void;
 }
 
@@ -146,6 +147,12 @@ export const useAppStore = create<AppState>()(
           };
         });
       },
+
+      hydrateFromServer: ({ progress, sessions }) =>
+        set(() => ({
+          progress,
+          sessions: sessions.slice(0, SESSIONS_CAP),
+        })),
 
       reset: () => set(() => freshState()),
     }),

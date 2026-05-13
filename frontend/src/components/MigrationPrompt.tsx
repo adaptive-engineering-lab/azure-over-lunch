@@ -4,9 +4,11 @@ import { useAppStore } from '../lib/store';
 import { supabase } from '../lib/supabase';
 import { buildMigrationPlan, migrationIsEmpty } from '../lib/migration/plan';
 import { executeMigration, type MigrationResult } from '../lib/migration/execute';
+import { hydrateStoreFromServer } from '../lib/migration/hydrate';
 
 type State =
   | { kind: 'idle' }
+  | { kind: 'hydrating' }
   | { kind: 'prompt'; counts: { progress: number; sessions: number } }
   | { kind: 'working' }
   | { kind: 'done'; result: MigrationResult }
@@ -25,14 +27,32 @@ export function MigrationPrompt() {
   const [state, setState] = useState<State>({ kind: 'idle' });
 
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      // Reset on sign-out so re-login triggers hydration again.
+      if (state.kind !== 'idle') setState({ kind: 'idle' });
+      return;
+    }
     if (state.kind !== 'idle') return;
     const plan = buildMigrationPlan({ progress, sessions });
-    if (migrationIsEmpty(plan)) return;
+    if (migrationIsEmpty(plan)) {
+      // Nothing to migrate — pull server state so this device sees existing progress.
+      setState({ kind: 'hydrating' });
+      hydrateStoreFromServer(supabase(), user.id)
+        .then(() =>
+          setState({
+            kind: 'done',
+            result: { progressInserted: 0, progressMerged: 0, sessionsInserted: 0 },
+          }),
+        )
+        .catch((err) =>
+          setState({ kind: 'error', message: err instanceof Error ? err.message : 'Hydration failed.' }),
+        );
+      return;
+    }
     setState({ kind: 'prompt', counts: { progress: plan.progressCount, sessions: plan.sessionCount } });
   }, [user, progress, sessions, state.kind]);
 
-  if (!user || state.kind === 'idle') return null;
+  if (!user || state.kind === 'idle' || state.kind === 'hydrating') return null;
 
   async function onAccept() {
     if (!user) return;
@@ -40,10 +60,11 @@ export function MigrationPrompt() {
     const plan = buildMigrationPlan({ progress, sessions });
     try {
       const result = await executeMigration(supabase(), user.id, plan);
-      // Preserve preferences (theme, session length); reset the rest.
+      // Preserve preferences (theme, session length); replace progress/sessions with server truth.
       reset();
       setTheme(theme);
       setLength(sessionLength);
+      await hydrateStoreFromServer(supabase(), user.id);
       setState({ kind: 'done', result });
     } catch (err) {
       setState({ kind: 'error', message: err instanceof Error ? err.message : 'Migration failed.' });
