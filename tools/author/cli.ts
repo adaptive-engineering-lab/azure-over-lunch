@@ -39,7 +39,10 @@ async function main(): Promise<void> {
     const topic = require(flags, 'topic');
     const difficulty = Number(require(flags, 'difficulty')) as 1 | 2 | 3;
     const count = Number(require(flags, 'count'));
-    const report = await draftItems({ type, domain, topic, difficulty, count });
+    const sourceFiles = flags['source-files']
+      ? flags['source-files'].split(',').map((s) => s.trim()).filter(Boolean)
+      : undefined;
+    const report = await draftItems({ type, domain, topic, difficulty, count, sourceFiles });
     for (const r of report.rejections) {
       console.error(`[INVALID] id=${r.id} field=${r.field} reason=${r.reason}`);
     }
@@ -52,6 +55,7 @@ async function main(): Promise<void> {
         accepted: report.accepted,
         rejected: report.rejected,
         file: report.file,
+        groundedIn: report.groundedIn,
       }),
     );
     return;
@@ -65,7 +69,7 @@ async function main(): Promise<void> {
     return;
   }
   console.error('Usage:');
-  console.error('  author draft --type=<flashcard|mcq|product-id> --domain=<d> --topic=<t> --difficulty=<1|2|3> --count=<n>');
+  console.error('  author draft --type=<flashcard|mcq|product-id> --domain=<d> --topic=<t> --difficulty=<1|2|3> --count=<n> [--source-files=a.md,b.md,…]');
   console.error('  author promote <draft-file> --reviewer=<initials>');
   process.exit(2);
 }
