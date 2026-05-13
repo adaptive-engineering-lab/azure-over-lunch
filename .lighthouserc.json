@@ -2,6 +2,7 @@
   "ci": {
     "collect": {
       "staticDistDir": "frontend/dist",
+      "isSinglePageApplication": true,
       "url": [
         "http://localhost/",
         "http://localhost/learn",
