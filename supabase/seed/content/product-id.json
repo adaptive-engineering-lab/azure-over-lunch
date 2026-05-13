@@ -138,5 +138,145 @@
       "description": "Disaster recovery service that replicates Azure VMs, on-prem VMs, and physical servers to a secondary region for orchestrated failover during region or datacenter outages.",
       "common_confusions": ["Azure Backup", "Azure Migrate"]
     }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-00000000000b",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "vnet",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Virtual Network (VNet)",
+      "category": "Networking",
+      "description": "The foundational private network in Azure. Lets resources such as VMs and databases communicate securely with each other, the internet, and on-premises networks. Your own isolated network segment in the cloud.",
+      "common_confusions": ["VNet Peering", "Subnet"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-00000000000c",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Network Security Group (NSG)",
+      "category": "Networking",
+      "description": "A subnet- or NIC-level firewall with inbound/outbound rules that allow or deny traffic based on source, destination, port, and protocol.",
+      "common_confusions": ["Azure Firewall", "Application Security Group"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-00000000000d",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "load-balancer",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Load Balancer",
+      "category": "Networking",
+      "description": "Layer-4 (TCP/UDP) regional load balancer that distributes inbound traffic across multiple backend VMs. Comes in Public (internet-facing) and Internal (in-VNet) flavors for high availability and scale-out.",
+      "common_confusions": ["Azure Application Gateway", "Azure Front Door"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-00000000000e",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "application-gateway",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Application Gateway",
+      "category": "Networking",
+      "description": "Layer-7 (HTTP/HTTPS) load balancer with URL path routing, host-header routing, cookie-based affinity, SSL termination, and an integrated Web Application Firewall.",
+      "common_confusions": ["Azure Load Balancer", "Azure Front Door"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-00000000000f",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "dns",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure DNS",
+      "category": "Networking",
+      "description": "Hosted DNS service that resolves domain names to IP addresses. Supports public zones (internet-facing) and private zones (resolution within VNets only).",
+      "common_confusions": ["Private DNS Zones", "Traffic Manager"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-000000000010",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "vpn-gateway",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "VPN Gateway",
+      "category": "Networking",
+      "description": "Encrypted IPsec/IKE tunnels between an Azure VNet and on-premises networks (Site-to-Site) or individual devices (Point-to-Site) over the public internet.",
+      "common_confusions": ["ExpressRoute", "Azure Bastion"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-000000000011",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "expressroute",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure ExpressRoute",
+      "category": "Networking",
+      "description": "Private, dedicated connection from on-premises to Azure — not over the public internet. Higher reliability, lower latency, and consistent bandwidth versus VPN. Enterprise hybrid connectivity.",
+      "common_confusions": ["VPN Gateway", "Virtual WAN"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-000000000012",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "bastion",
+    "difficulty": 1,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Bastion (admin entry)",
+      "category": "Networking",
+      "description": "Secure RDP and SSH access to VMs through the Azure portal, with no public IP exposure on the VM. Sits inside the VNet as a managed jump host.",
+      "common_confusions": ["VPN Gateway", "Just-in-Time VM access"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-000000000013",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "firewall",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Firewall",
+      "category": "Networking",
+      "description": "Fully managed cloud-native firewall at the VNet perimeter. Supports application rules (FQDNs), network rules, NAT rules, and threat intelligence. Cross-VNet scope, more powerful than NSGs.",
+      "common_confusions": ["Network Security Group (NSG)", "Application Gateway WAF"]
+    }
+  },
+  {
+    "id": "a3000000-dd00-4000-8000-000000000014",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "virtual-wan",
+    "difficulty": 2,
+    "source": "bank",
+    "content": {
+      "service_name": "Azure Virtual WAN",
+      "category": "Networking",
+      "description": "Networking service that unifies routing, VPN, and ExpressRoute into a single managed hub. Used for large-scale branch-to-branch and branch-to-Azure connectivity. Replaces manually-built hub-spoke topologies.",
+      "common_confusions": ["ExpressRoute", "VPN Gateway"]
+    }
   }
 ]
