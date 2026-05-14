@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DOMAINS, DOMAIN_LABELS, type Domain } from '../lib/questions/types';
 import { ROUTES } from '../lib/routes';
 import { supabase } from '../lib/supabase';
@@ -9,7 +9,11 @@ const DIFFS = [1, 2, 3] as const;
 
 export default function QuizSelectPage() {
   const navigate = useNavigate();
-  const [domain, setDomain] = useState<Domain>('identity-governance');
+  const [searchParams] = useSearchParams();
+  const initialDomain = DOMAINS.includes(searchParams.get('domain') as Domain)
+    ? (searchParams.get('domain') as Domain)
+    : 'identity-governance';
+  const [domain, setDomain] = useState<Domain>(initialDomain);
   const [difficulty, setDifficulty] = useState<1 | 2 | 3>(2);
   const [count, setCount] = useState<5 | 10 | 20>(10);
   const [timer, setTimer] = useState(false);

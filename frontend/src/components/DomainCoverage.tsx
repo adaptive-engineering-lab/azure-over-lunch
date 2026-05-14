@@ -24,7 +24,8 @@ export function DomainCoverage() {
           return (
             <Link
               key={d}
-              to={ROUTES.learn}
+              to={`${ROUTES.quiz}?domain=${d}`}
+              aria-label={`Start a ${DOMAIN_LABELS[d]} quiz`}
               className={[
                 'group relative overflow-hidden rounded-xl bg-bg-elevated p-4 ring-1',
                 accent.ring,

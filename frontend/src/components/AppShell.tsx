@@ -24,10 +24,10 @@ export function AppShell() {
       </a>
       <PrivateModeWarning />
       <OfflineIndicator />
-      <header className="mx-auto flex w-full max-w-screen-md items-center justify-end px-4 py-2">
+      <header className="mx-auto flex w-full max-w-screen-md xl:max-w-6xl items-center justify-end px-4 py-2">
         <ProfileMenu />
       </header>
-      <main id="main" className="flex-1 mx-auto w-full max-w-screen-md px-4 pb-24">
+      <main id="main" className="flex-1 mx-auto w-full max-w-screen-md xl:max-w-6xl px-4 pb-24">
         <Outlet />
       </main>
       <MigrationPrompt />
@@ -36,7 +36,7 @@ export function AppShell() {
         aria-label="Primary"
         className="sticky bottom-0 border-t border-divider bg-bg-elevated"
       >
-        <ul className="mx-auto max-w-screen-md grid grid-cols-4">
+        <ul className="mx-auto max-w-screen-md xl:max-w-6xl grid grid-cols-4">
           {NAV.map((item) => (
             <li key={item.to} className="contents">
               <NavLink
