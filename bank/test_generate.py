@@ -20,6 +20,7 @@ from bank.generate import (  # noqa: E402
     knowledge_files_for,
     existing_snippets,
     render_prompt,
+    stamp_audit_fields,
     validate_items,
 )
 
@@ -31,6 +32,8 @@ VALID_FLASHCARD = {
     "topic": "nsg",
     "difficulty": 1,
     "source": "ai-generated",
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:00:00Z",
     "content": {"front": "What is an NSG?", "back": "A stateful packet filter at the subnet/NIC level."},
 }
 
@@ -41,6 +44,8 @@ VALID_MCQ = {
     "topic": "nsg",
     "difficulty": 2,
     "source": "ai-generated",
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:00:00Z",
     "content": {
         "question": "Which best filters east-west VM traffic?",
         "options": {"A": "NSG", "B": "DNS", "C": "Bastion", "D": "App Gateway"},
@@ -139,6 +144,40 @@ class Validation(unittest.TestCase):
         out = validate_items([bad], existing_ids=set())
         self.assertEqual(out.accepted, [])
         self.assertIn("source", out.rejected[0][1])
+
+    def test_rejects_ai_generated_missing_reviewer_id(self):
+        bad = {k: v for k, v in VALID_FLASHCARD.items() if k != "reviewer_id"}
+        out = validate_items([bad], existing_ids=set())
+        self.assertEqual(out.accepted, [])
+        self.assertIn("reviewer_id", out.rejected[0][1])
+
+    def test_rejects_ai_generated_missing_reviewed_at(self):
+        bad = {k: v for k, v in VALID_FLASHCARD.items() if k != "reviewed_at"}
+        out = validate_items([bad], existing_ids=set())
+        self.assertEqual(out.accepted, [])
+        self.assertIn("reviewed_at", out.rejected[0][1])
+
+
+class AuditStamping(unittest.TestCase):
+    def test_stamps_missing_fields(self):
+        bare = {k: v for k, v in VALID_FLASHCARD.items() if k not in {"reviewer_id", "reviewed_at"}}
+        stamped = stamp_audit_fields([bare], "LA", "2026-05-14T16:00:00Z")
+        self.assertEqual(stamped[0]["reviewer_id"], "LA")
+        self.assertEqual(stamped[0]["reviewed_at"], "2026-05-14T16:00:00Z")
+
+    def test_preserves_existing_stamps(self):
+        existing = {**VALID_FLASHCARD, "reviewer_id": "JD", "reviewed_at": "2025-01-01T00:00:00Z"}
+        stamped = stamp_audit_fields([existing], "LA", "2026-05-14T16:00:00Z")
+        self.assertEqual(stamped[0]["reviewer_id"], "JD")
+        self.assertEqual(stamped[0]["reviewed_at"], "2025-01-01T00:00:00Z")
+
+    def test_skips_bank_sourced_items(self):
+        bank_item = {**VALID_FLASHCARD, "source": "bank"}
+        del bank_item["reviewer_id"]
+        del bank_item["reviewed_at"]
+        stamped = stamp_audit_fields([bank_item], "LA", "2026-05-14T16:00:00Z")
+        self.assertNotIn("reviewer_id", stamped[0])
+        self.assertNotIn("reviewed_at", stamped[0])
 
 
 class Prompt(unittest.TestCase):

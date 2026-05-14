@@ -247,6 +247,13 @@ def _validate_one(item: dict, existing_ids: set[str], seen_ids: set[str]) -> str
         return f"difficulty {item['difficulty']!r} not in {{1,2,3}}"
     if item["source"] != "ai-generated":
         return "source must be 'ai-generated' for agent output"
+    # The seed CLI's JSON Schema enforces reviewer_id + reviewed_at for
+    # source='ai-generated'. Match that rule here so drafts can't slip
+    # past generate.py only to fail at `pnpm seed:validate`.
+    if not item.get("reviewer_id"):
+        return "ai-generated items require non-empty 'reviewer_id'"
+    if not item.get("reviewed_at"):
+        return "ai-generated items require 'reviewed_at' timestamp"
     if not isinstance(item["content"], dict):
         return "content must be an object"
     return _validate_content_shape(item["type"], item["content"])
@@ -356,7 +363,30 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                    help="Print the rendered prompt and exit (no agent call).")
     p.add_argument("--from-file", type=Path, default=None,
                    help="Skip the agent call and parse this file as the response (for testing).")
+    p.add_argument("--reviewer", default=None,
+                   help="Reviewer initials stamped onto every accepted item "
+                        "(falls back to $BANK_REVIEWER then 'anonymous').")
     return p.parse_args(argv)
+
+
+def stamp_audit_fields(items: list[dict], reviewer_id: str, now_iso: str) -> list[dict]:
+    """Stamp reviewer_id + reviewed_at on ai-generated items missing them.
+
+    The seed CLI's JSON Schema requires both fields when source='ai-generated',
+    so stamping pre-validation prevents drafts from slipping past generate.py
+    only to fail at `pnpm seed:validate`. Items that already carry stamps
+    (e.g. a re-author run) are left alone.
+    """
+    stamped: list[dict] = []
+    for item in items:
+        if item.get("source") == "ai-generated":
+            patched = dict(item)
+            patched.setdefault("reviewer_id", reviewer_id)
+            patched.setdefault("reviewed_at", now_iso)
+            stamped.append(patched)
+        else:
+            stamped.append(item)
+    return stamped
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -411,6 +441,10 @@ def main(argv: list[str] | None = None) -> int:
         raw = call_agent(rendered)
 
     items = extract_json_array(raw)
+    import os
+    reviewer = args.reviewer or os.environ.get("BANK_REVIEWER") or "anonymous"
+    now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    items = stamp_audit_fields(items, reviewer, now_iso)
     outcome = validate_items(items, existing_ids)
 
     DRAFT_DIR.mkdir(parents=True, exist_ok=True)
