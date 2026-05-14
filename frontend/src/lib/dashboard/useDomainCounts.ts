@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../supabase';
 import { DOMAINS, type Domain } from '../questions/types';
 
+type ItemType = 'flashcard' | 'mcq' | 'product-id';
+
 export interface DomainCounts {
   byDomain: Record<Domain, number>;
+  byType: Record<ItemType, number>;
   total: number;
   loading: boolean;
   error: string | null;
@@ -17,6 +20,12 @@ const EMPTY: Record<Domain, number> = {
   monitoring: 0,
 };
 
+const EMPTY_TYPES: Record<ItemType, number> = {
+  flashcard: 0,
+  mcq: 0,
+  'product-id': 0,
+};
+
 /**
  * Fetches the question bank's domain × count breakdown in a single
  * lightweight query (id + domain only, ~6 KB for ~100 rows). Tallies
@@ -25,6 +34,7 @@ const EMPTY: Record<Domain, number> = {
  */
 export function useDomainCounts(): DomainCounts {
   const [byDomain, setByDomain] = useState<Record<Domain, number>>(EMPTY);
+  const [byType, setByType] = useState<Record<ItemType, number>>(EMPTY_TYPES);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +42,7 @@ export function useDomainCounts(): DomainCounts {
     let cancelled = false;
     supabase()
       .from('questions')
-      .select('domain')
+      .select('domain, type')
       .then(({ data, error: e }) => {
         if (cancelled) return;
         if (e) {
@@ -40,11 +50,14 @@ export function useDomainCounts(): DomainCounts {
           setLoading(false);
           return;
         }
-        const tally: Record<Domain, number> = { ...EMPTY };
-        for (const row of (data ?? []) as { domain: Domain }[]) {
-          if (DOMAINS.includes(row.domain)) tally[row.domain] += 1;
+        const dTally: Record<Domain, number> = { ...EMPTY };
+        const tTally: Record<ItemType, number> = { ...EMPTY_TYPES };
+        for (const row of (data ?? []) as { domain: Domain; type: ItemType }[]) {
+          if (DOMAINS.includes(row.domain)) dTally[row.domain] += 1;
+          if (row.type in tTally) tTally[row.type] += 1;
         }
-        setByDomain(tally);
+        setByDomain(dTally);
+        setByType(tTally);
         setLoading(false);
       });
     return () => {
@@ -53,5 +66,5 @@ export function useDomainCounts(): DomainCounts {
   }, []);
 
   const total = DOMAINS.reduce((sum, d) => sum + byDomain[d], 0);
-  return { byDomain, total, loading, error };
+  return { byDomain, byType, total, loading, error };
 }
