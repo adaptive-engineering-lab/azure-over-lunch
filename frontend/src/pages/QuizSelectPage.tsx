@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DOMAINS, DOMAIN_LABELS, type Domain } from '../lib/questions/types';
 import { ROUTES } from '../lib/routes';
+import { supabase } from '../lib/supabase';
 
 const COUNTS = [5, 10, 20] as const;
 const DIFFS = [1, 2, 3] as const;
@@ -12,6 +13,24 @@ export default function QuizSelectPage() {
   const [difficulty, setDifficulty] = useState<1 | 2 | 3>(2);
   const [count, setCount] = useState<5 | 10 | 20>(10);
   const [timer, setTimer] = useState(false);
+  const [poolSize, setPoolSize] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    supabase()
+      .from('questions')
+      .select('id', { count: 'exact', head: true })
+      .eq('type', 'mcq')
+      .eq('domain', domain)
+      .then(({ count: n }) => {
+        if (!cancelled) setPoolSize(n ?? 0);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [domain]);
+
+  const willDeliver = poolSize === null ? null : Math.min(poolSize, count);
 
   function start() {
     const p = new URLSearchParams({
@@ -72,12 +91,23 @@ export default function QuizSelectPage() {
         </label>
       </Fieldset>
 
+      {poolSize !== null && (
+        <p className="mt-4 text-xs text-fg-muted">
+          {poolSize === 0
+            ? `No MCQs available for ${DOMAIN_LABELS[domain]} yet.`
+            : `${poolSize} MCQ${poolSize === 1 ? '' : 's'} available in ${DOMAIN_LABELS[domain]}. Difficulty is a preference — adjacent levels fill any gap.`}
+        </p>
+      )}
+
       <button
         type="button"
         onClick={start}
-        className="mt-6 w-full rounded-md bg-accent px-4 py-3 text-base font-semibold text-accent-fg"
+        disabled={poolSize === 0}
+        className="mt-4 w-full rounded-md bg-accent px-4 py-3 text-base font-semibold text-accent-fg disabled:opacity-50"
       >
-        Start quiz
+        {willDeliver !== null && willDeliver < count
+          ? `Start quiz (${willDeliver} questions)`
+          : 'Start quiz'}
       </button>
     </section>
   );
