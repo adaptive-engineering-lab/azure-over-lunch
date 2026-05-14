@@ -60,7 +60,7 @@
     "content": {
       "service_name": "Azure Files",
       "category": "Storage",
-      "description": "Fully managed file shares in the cloud accessible via SMB and NFS protocols. Used for lift-and-shift workloads, shared application settings, and cross-platform file access.",
+      "description": "Fully managed cloud file shares accessible via SMB and NFS — used for lift-and-shift workloads and cross-platform shared access.",
       "common_confusions": [
         "Azure NetApp Files",
         "Azure Blob Storage"
@@ -71,7 +71,7 @@
     "id": "a3000000-dd00-4000-8000-000000000005",
     "type": "product-id",
     "domain": "compute",
-    "topic": "vm-scale-set",
+    "topic": "scale-sets",
     "difficulty": 2,
     "source": "bank",
     "content": {
@@ -249,8 +249,8 @@
       "category": "Networking",
       "description": "Encrypted IPsec/IKE tunnels between an Azure VNet and on-premises networks (Site-to-Site) or individual devices (Point-to-Site) over the public internet.",
       "common_confusions": [
-        "ExpressRoute",
-        "Azure Bastion"
+        "Azure ExpressRoute",
+        "Azure Virtual WAN"
       ]
     }
   },
@@ -264,7 +264,7 @@
     "content": {
       "service_name": "Azure ExpressRoute",
       "category": "Networking",
-      "description": "Private, dedicated connection from on-premises to Azure — not over the public internet. Higher reliability, lower latency, and consistent bandwidth versus VPN. Enterprise hybrid connectivity.",
+      "description": "Private, dedicated fiber connection from on-premises to Azure that bypasses the public internet — lower latency and consistent bandwidth vs VPN.",
       "common_confusions": [
         "VPN Gateway",
         "Virtual WAN"
@@ -298,7 +298,7 @@
     "content": {
       "service_name": "Azure Virtual WAN",
       "category": "Networking",
-      "description": "Networking service that unifies routing, VPN, and ExpressRoute into a single managed hub. Used for large-scale branch-to-branch and branch-to-Azure connectivity. Replaces manually-built hub-spoke topologies.",
+      "description": "Managed networking hub that unifies VPN, ExpressRoute, and SD-WAN connectivity for global branch-to-branch and branch-to-Azure traffic.",
       "common_confusions": [
         "ExpressRoute",
         "VPN Gateway"
@@ -564,8 +564,8 @@
       "category": "Identity",
       "description": "ARM-level locks that prevent accidental modification or deletion. ReadOnly blocks updates and deletes; CanNotDelete blocks deletes only.",
       "common_confusions": [
-        "Azure Policy deny effects",
-        "RBAC role deny"
+        "Azure Policy effect: Deny",
+        "Conditional Access policy"
       ]
     },
     "reviewer_id": "LA",
@@ -622,7 +622,7 @@
       "description": "Top-level container that holds Blob, File, Queue, Table, and Data Lake data with a globally unique namespace and a chosen redundancy and performance tier.",
       "common_confusions": [
         "Azure Blob Storage",
-        "Storage Account container"
+        "Resource Group"
       ]
     },
     "reviewer_id": "LA",
@@ -688,8 +688,8 @@
   {
     "id": "a3000100-dd00-4000-8000-000000000016",
     "type": "product-id",
-    "domain": "storage",
-    "topic": "key-vault",
+    "domain": "identity-governance",
+    "topic": "azure-policy",
     "difficulty": 2,
     "source": "ai-generated",
     "content": {
@@ -1026,5 +1026,62 @@
     },
     "reviewer_id": "LA",
     "reviewed_at": "2026-05-14T16:06:18Z"
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000034",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "front-door",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T17:31:37Z",
+    "content": {
+      "service_name": "Azure Front Door",
+      "category": "Networking",
+      "description": "Global, Layer-7 entry point that combines CDN, WAF, anycast load balancing, and TLS termination at Microsoft edge POPs.",
+      "common_confusions": [
+        "Azure Application Gateway",
+        "Azure Traffic Manager"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000035",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "traffic-manager",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T17:31:37Z",
+    "content": {
+      "service_name": "Azure Traffic Manager",
+      "category": "Networking",
+      "description": "DNS-based global traffic router that returns the IP of the best endpoint (priority, performance, weighted, geographic) for each client.",
+      "common_confusions": [
+        "Azure Front Door",
+        "Azure Load Balancer"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000036",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "private-endpoint",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T17:31:37Z",
+    "content": {
+      "service_name": "Service Endpoint",
+      "category": "Networking",
+      "description": "Subnet-level secure tunnel to Azure PaaS services (Storage, SQL, etc.) over the Microsoft backbone — keeps the service public-IP but restricts source to your VNet.",
+      "common_confusions": [
+        "Azure Private Endpoint",
+        "Service Tag"
+      ]
+    }
   }
 ]

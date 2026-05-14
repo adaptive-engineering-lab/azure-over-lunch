@@ -56,7 +56,7 @@ ALLOWED_TOPICS: dict[str, set[str]] = {
     },
     "storage": {
         "storage-accounts", "blob", "blob-tiers", "lifecycle",
-        "sas-tokens", "azure-files", "redundancy", "key-vault",
+        "sas-tokens", "azure-files", "redundancy",
     },
     "compute": {
         "vm-sku", "availability", "scale-sets", "app-service",
@@ -66,6 +66,7 @@ ALLOWED_TOPICS: dict[str, set[str]] = {
         "vnet", "vnet-peering", "nsg", "dns", "load-balancer",
         "application-gateway", "vpn-gateway", "expressroute",
         "bastion", "firewall", "virtual-wan", "private-endpoint",
+        "front-door", "traffic-manager",
     },
     "monitoring": {
         "alerts", "metrics", "log-analytics", "backup", "site-recovery",
