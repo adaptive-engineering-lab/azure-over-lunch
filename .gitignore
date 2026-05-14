@@ -11,6 +11,7 @@ dist/
 build/
 .pnpm-store/
 *.log
+*.tsbuildinfo
 
 # Editor
 .vscode/
