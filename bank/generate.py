@@ -52,10 +52,11 @@ ALLOWED_TOPICS: dict[str, set[str]] = {
     "identity-governance": {
         "entra-id", "rbac", "groups", "conditional-access",
         "management-groups", "resource-locks", "azure-policy", "sspr",
+        "cloud-shell", "arm",
     },
     "storage": {
         "storage-accounts", "blob", "blob-tiers", "lifecycle",
-        "sas-tokens", "azure-files", "redundancy",
+        "sas-tokens", "azure-files", "redundancy", "key-vault",
     },
     "compute": {
         "vm-sku", "availability", "scale-sets", "app-service",
