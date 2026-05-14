@@ -320,7 +320,9 @@
         "Azure App Service",
         "Azure Container Instances"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000050-dd00-4000-8000-000000000002",
@@ -337,7 +339,9 @@
         "Azure Functions",
         "Azure Container Apps"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000050-dd00-4000-8000-000000000003",
@@ -354,7 +358,9 @@
         "Azure App Service",
         "Azure Virtual Machine"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000050-dd00-4000-8000-000000000004",
@@ -371,7 +377,9 @@
         "Availability Zone",
         "Virtual Machine Scale Set"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000050-dd00-4000-8000-000000000005",
@@ -388,7 +396,9 @@
         "Availability Set",
         "Azure Region Pair"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000001",
@@ -405,7 +415,9 @@
         "Azure CLI (local install)",
         "Azure PowerShell (local install)"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000002",
@@ -422,7 +434,9 @@
         "ARM template",
         "Azure Service Manager (classic)"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000003",
@@ -439,7 +453,9 @@
         "Microsoft Entra ID",
         "Azure Policy"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000004",
@@ -456,7 +472,9 @@
         "Microsoft Entra ID",
         "Active Directory Domain Services (on-prem)"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000005",
@@ -473,7 +491,9 @@
         "Microsoft Entra Connect Sync",
         "Microsoft Entra Domain Services"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000006",
@@ -490,7 +510,9 @@
         "Microsoft Entra ID roles",
         "Azure Policy"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000007",
@@ -507,7 +529,9 @@
         "Azure Policy",
         "ARM template"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000008",
@@ -524,7 +548,9 @@
         "Subscription",
         "Resource Group"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000009",
@@ -541,7 +567,9 @@
         "Azure Policy deny effects",
         "RBAC role deny"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000010",
@@ -558,7 +586,9 @@
         "Multi-Factor Authentication",
         "Password write-back via Entra Connect"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000011",
@@ -575,7 +605,9 @@
         "Multi-Factor Authentication",
         "Azure RBAC"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000012",
@@ -592,7 +624,9 @@
         "Azure Blob Storage",
         "Storage Account container"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000013",
@@ -609,7 +643,9 @@
         "Azure Blob Storage",
         "Azure Synapse Analytics"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000014",
@@ -626,7 +662,9 @@
         "Azure Files",
         "DFS Replication"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000015",
@@ -643,7 +681,9 @@
         "Storage account access key",
         "Anonymous public access"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000016",
@@ -660,7 +700,9 @@
         "Microsoft Entra ID secrets",
         "Azure Managed HSM"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000017",
@@ -677,7 +719,9 @@
         "Reserved Instances",
         "Standard pay-as-you-go VMs"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000018",
@@ -694,7 +738,9 @@
         "Azure Marketplace images",
         "VM Image (legacy)"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000019",
@@ -711,7 +757,9 @@
         "Azure Container Instances",
         "Azure Kubernetes Service"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000020",
@@ -728,7 +776,9 @@
         "Azure Container Apps",
         "Azure Service Fabric"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000021",
@@ -745,7 +795,9 @@
         "VPN Gateway (VNet-to-VNet)",
         "Azure Virtual WAN"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000022",
@@ -762,7 +814,9 @@
         "Network Security Group (NSG)",
         "Service Tag"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000023",
@@ -779,7 +833,9 @@
         "Azure DNS (public)",
         "Azure Private Endpoint"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000024",
@@ -796,7 +852,9 @@
         "Azure Monitor",
         "Connection Monitor"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000025",
@@ -813,7 +871,9 @@
         "Service Endpoint",
         "Private Link Service"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000026",
@@ -830,7 +890,9 @@
         "Log Analytics workspace",
         "Azure Network Watcher"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000027",
@@ -847,7 +909,9 @@
         "Log Analytics agent (MMA)",
         "Telegraf agent"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000028",
@@ -864,7 +928,9 @@
         "Azure Monitor",
         "Log Analytics workspace"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000029",
@@ -881,7 +947,9 @@
         "Diagnostic logs",
         "Microsoft Entra ID audit logs"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000030",
@@ -898,7 +966,9 @@
         "Alert rule",
         "Notification setting"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000031",
@@ -915,7 +985,9 @@
         "Azure Site Recovery",
         "VM snapshots"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000032",
@@ -932,7 +1004,9 @@
         "Backup vault",
         "Storage account"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   },
   {
     "id": "a3000100-dd00-4000-8000-000000000033",
@@ -949,6 +1023,8 @@
         "Recovery Services vault",
         "Storage account"
       ]
-    }
+    },
+    "reviewer_id": "LA",
+    "reviewed_at": "2026-05-14T16:06:18Z"
   }
 ]
