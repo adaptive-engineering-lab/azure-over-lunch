@@ -24,15 +24,31 @@ export async function executeMigration(
 
   if (plan.progress.length > 0) {
     const questionIds = plan.progress.map((p) => p.questionId);
+
+    // Drop progress rows pointing at questions that no longer exist in the
+    // bank (e.g. items removed from the seed). Without this guard, the
+    // upsert below trips the question_id FK with an opaque error.
+    const { data: liveQs, error: liveErr } = await client
+      .from('questions')
+      .select('id')
+      .in('id', questionIds);
+    if (liveErr) throw new Error(`migration question lookup failed: ${liveErr.message}`);
+    const liveIds = new Set((liveQs ?? []).map((q) => q.id));
+    const validProgress = plan.progress.filter((p) => liveIds.has(p.questionId));
+    if (validProgress.length === 0) {
+      // Nothing left to migrate; skip the upsert entirely.
+      return { progressInserted: 0, progressMerged: 0, sessionsInserted };
+    }
+
     const { data: existing, error: selErr } = await client
       .from('user_progress')
       .select('question_id, times_seen, times_correct, last_rating, next_review, updated_at')
-      .in('question_id', questionIds);
+      .in('question_id', validProgress.map((p) => p.questionId));
     if (selErr) throw new Error(`migration select failed: ${selErr.message}`);
 
     const existingByQid = new Map((existing ?? []).map((r) => [r.question_id, r]));
 
-    const rowsToUpsert = plan.progress.map((p) => {
+    const rowsToUpsert = validProgress.map((p) => {
       const remote = existingByQid.get(p.questionId);
       if (remote) {
         progressMerged += 1;
