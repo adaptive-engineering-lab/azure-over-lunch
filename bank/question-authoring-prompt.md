@@ -1,31 +1,24 @@
-# Claude Code — Question Authoring Prompt
-# AZ-104 Learning Game · tools/author/
+# AZ-104 Question Authoring Prompt
 
-Use this prompt when running Claude Code locally to generate question bank
-entries from your `.md` knowledge files. Output is JSON only — review each
-item before committing to the seed file.
+This is the prompt template sent to the **AZ104-ExamPrep-Agent** by
+`bank/generate.py`. The output **must** match the live Supabase
+`public.questions` schema exactly so seed JSON drops in cleanly via
+`pnpm seed`.
 
----
-
-## How to run
-
-```bash
-# From the project root, with your knowledge bank files ready
-claude --dangerously-skip-permissions
-
-# Then paste the prompt below, substituting the variables in <angle brackets>
-```
+The script substitutes the `<angle bracket>` placeholders. Do not edit
+the schema sections without also updating the corresponding CHECK
+constraints in `supabase/migrations/0001_questions.sql`.
 
 ---
 
 ## The Prompt
 
-```
-You are a content authoring assistant for an AZ-104 exam-prep game.
-Your only job is to read the knowledge-bank files I provide and produce
-validated JSON question items that match the app's data schema exactly.
-You must not invent facts. Every claim in every item must be traceable
-to the source files I give you.
+```text
+You are a content authoring assistant for an AZ-104 exam-prep app.
+Your only job: read the knowledge-bank files I provide and produce
+JSON question items that match the app's data schema exactly.
+You must NOT invent facts. Every claim in every item must be
+traceable to the source files I give you.
 
 ---
 
@@ -34,171 +27,160 @@ to the source files I give you.
 Game modes:
 - flashcard   → vocabulary and concept recall, self-rated by the learner
 - mcq         → 4-option multiple choice, one correct answer, with explanation
-- product-id  → learner maps a service name / description / icon to its
-                category or vice-versa
+- product-id  → learner maps an Azure service name to its category / description
 
 Difficulty scale:
-  1 = Foundation   (define the service, basic "what is")
-  2 = Practitioner (compare services, choose the right one for a scenario)
+  1 = Foundation   ("what is" — define the service)
+  2 = Practitioner (compare services / pick the right one for a scenario)
   3 = Administrator (multi-step scenarios, edge cases, exam-trap questions)
 
-AZ-104 domains and allowed domain slugs:
-  "identity"   → Manage Azure Identities & Governance
-  "storage"    → Implement & Manage Storage
-  "compute"    → Deploy & Manage Azure Compute Resources
-  "networking" → Implement & Manage Virtual Networking
-  "monitoring" → Monitor & Maintain Azure Resources
+Allowed `domain` values (use EXACTLY these slugs):
+  "identity-governance"   → Manage Azure Identities & Governance
+  "storage"               → Implement & Manage Storage
+  "compute"               → Deploy & Manage Azure Compute Resources
+  "networking"            → Implement & Manage Virtual Networking
+  "monitoring"            → Monitor & Maintain Azure Resources
 
-Allowed topic values per domain (use exactly these strings):
-  identity   : ["Entra ID", "RBAC", "Subscriptions", "Policies"]
-  storage    : ["Blob", "Files", "Lifecycle", "SAS tokens"]
-  compute    : ["VMs", "Scale Sets", "App Service", "Containers"]
-  networking : ["VNets", "NSGs", "Load Balancer", "DNS", "VPN",
-                "ExpressRoute", "Bastion", "Azure Firewall",
-                "Application Gateway", "Virtual WAN"]
-  monitoring : ["Monitor", "Alerts", "Backup", "Log Analytics"]
+Allowed `topic` slugs per domain (lowercase, hyphen-separated, EXACT match required):
+  identity-governance : ["entra-id", "rbac", "groups", "conditional-access",
+                         "management-groups", "resource-locks", "azure-policy",
+                         "sspr"]
+  storage             : ["storage-accounts", "blob", "blob-tiers", "lifecycle",
+                         "sas-tokens", "azure-files", "redundancy"]
+  compute             : ["vm-sku", "availability", "scale-sets", "app-service",
+                         "container-instances", "containers"]
+  networking          : ["vnet", "vnet-peering", "nsg", "dns", "load-balancer",
+                         "application-gateway", "vpn-gateway", "expressroute",
+                         "bastion", "firewall", "virtual-wan", "private-endpoint"]
+  monitoring          : ["alerts", "metrics", "log-analytics", "backup",
+                         "site-recovery"]
+
+If the requested domain/topic is not in this list, return an empty array
+and explain on the trailing summary line.
 
 ---
 
-## JSON schemas (output must match exactly)
+## JSON output schema (must match EXACTLY)
+
+Each item is one row in `public.questions`. Type-specific fields go
+INSIDE the `content` object — never at the top level.
 
 ### flashcard
 {
-  "id": "<generate a new UUIDv4>",
+  "id": "<UUIDv4 you generate>",
   "type": "flashcard",
-  "domain": "<domain slug>",
-  "topic": "<topic string from allowed list>",
-  "front": "<question or term — one sentence, ≤ 120 chars>",
-  "back": "<answer or definition — 1–3 sentences, plain English, no markdown>",
+  "domain": "<allowed domain slug>",
+  "topic": "<allowed topic slug>",
   "difficulty": <1 | 2 | 3>,
-  "tags": ["<domain slug>", "<topic slug>", "level-<difficulty>"],
-  "source": "ai-generated"
+  "source": "ai-generated",
+  "content": {
+    "front": "<question or term — one sentence, ≤ 120 chars>",
+    "back":  "<answer or definition — 1–3 sentences, plain English, no markdown>"
+  }
 }
 
 ### mcq
 {
-  "id": "<generate a new UUIDv4>",
+  "id": "<UUIDv4 you generate>",
   "type": "mcq",
-  "domain": "<domain slug>",
-  "topic": "<topic string from allowed list>",
-  "question": "<scenario or direct question — ≤ 200 chars>",
-  "options": {
-    "A": "<option text>",
-    "B": "<option text>",
-    "C": "<option text>",
-    "D": "<option text>"
-  },
-  "correct": "<A | B | C | D>",
-  "explanation": "<why correct is right AND why the top distractor is wrong — 2–4 sentences, no markdown>",
+  "domain": "<allowed domain slug>",
+  "topic": "<allowed topic slug>",
   "difficulty": <1 | 2 | 3>,
-  "tags": ["<domain slug>", "<topic slug>", "level-<difficulty>"],
-  "source": "ai-generated"
+  "source": "ai-generated",
+  "content": {
+    "question": "<scenario or direct question — ≤ 200 chars>",
+    "options":  { "A": "<text>", "B": "<text>", "C": "<text>", "D": "<text>" },
+    "correct":  "<A | B | C | D>",
+    "explanation": "<why correct is right AND why the top distractor is wrong — 2–4 sentences, no markdown>"
+  }
 }
 
 ### product-id
 {
-  "id": "<generate a new UUIDv4>",
+  "id": "<UUIDv4 you generate>",
   "type": "product-id",
-  "domain": "<domain slug>",
-  "topic": "<topic string from allowed list>",
-  "service_name": "<exact Azure service name>",
-  "category": "<Networking | Security | Compute | Storage | Identity | Monitoring>",
-  "description": "<one sentence: what it does and its key differentiator — ≤ 150 chars>",
-  "icon_url": "/icons/<kebab-case-service-name>.svg",
-  "common_confusions": ["<service name 1>", "<service name 2>"],
+  "domain": "<allowed domain slug>",
+  "topic": "<allowed topic slug>",
   "difficulty": <1 | 2 | 3>,
-  "tags": ["<domain slug>", "<topic slug>", "level-<difficulty>"],
-  "source": "ai-generated"
+  "source": "ai-generated",
+  "content": {
+    "service_name": "<exact Azure service name>",
+    "category":     "<Networking | Security | Compute | Storage | Identity | Monitoring>",
+    "description":  "<one sentence: what it does + key differentiator — ≤ 150 chars>",
+    "common_confusions": ["<service name 1>", "<service name 2>"]
+  }
 }
 
 ---
 
 ## Quality rules — apply to every item
 
-1. **Source fidelity**: every fact must appear in the knowledge-bank files
-   I provide. Do not use your training data to fill gaps.
-2. **No duplicates**: I will paste a list of existing item IDs and front/
-   question text below. Do not produce items with substantially the same
-   question as an existing one.
+1. **Source fidelity**: every fact must appear in the knowledge files
+   I provide. Do not fill gaps from training data.
+2. **No duplicates**: I will paste existing item ids and front/question
+   text below. Do not produce items substantially the same as one of them.
 3. **Distractor quality (MCQ)**: all four options must be plausible.
    Avoid obviously wrong answers. The top distractor should be a service
-   or value a learner might genuinely confuse with the correct answer.
-4. **Explanation completeness**: the explanation must address both why the
-   correct answer is right and why the most likely wrong answer is wrong.
+   or value a learner could genuinely confuse with the correct answer.
+4. **Explanation completeness**: explain WHY correct is right AND WHY the
+   most likely wrong answer is wrong.
 5. **Difficulty calibration**:
    - Level 1: "What is / What does X do?"
-   - Level 2: "A company needs X — which service?" (choose between 2 similar services)
-   - Level 3: Scenario with a constraint or a common exam trap (e.g. NSG vs
-     Azure Firewall, VPN Gateway vs ExpressRoute, Owner vs Contributor).
-6. **No markdown in answer text**: back, explanation, and description fields
-   must be plain sentences. No bullet points, no bold, no code fences.
-7. **Tag slugs**: topic tags must be lowercase, hyphens instead of spaces
-   (e.g. "sas-tokens", "load-balancer", "log-analytics").
+   - Level 2: "Company needs X — which service?" (choose between similar services)
+   - Level 3: Scenario with a constraint or exam trap (NSG vs Azure Firewall,
+     VPN Gateway vs ExpressRoute, Owner vs Contributor, etc.)
+6. **No markdown** in `back`, `explanation`, or `description`. Plain
+   sentences only.
+7. **Slugs are lowercase + hyphenated**. Use EXACTLY the slugs in the
+   allowed-topics list above.
 
 ---
 
 ## This authoring run
 
-Domain    : <networking>
-Topic(s)  : <NSGs, Azure Firewall, Application Gateway>
-Mode(s)   : <flashcard, mcq>          ← pick one or more
-Difficulty: <1, 2, 3>                 ← pick one or more
-Count     : <5 flashcards + 5 MCQs>   ← how many of each
+Domain      : <DOMAIN>
+Topic(s)    : <TOPICS>
+Mode(s)     : <MODES>
+Difficulty  : <DIFFICULTIES>
+Count       : <COUNT>
 
-Existing item IDs to avoid (paste your current seed IDs here):
-<
-  paste UUIDs or front/question text of existing items
-  leave blank if starting fresh
->
+Existing item ids + front/question text to avoid:
+<EXISTING>
 
-Knowledge-bank files to use as source (paste full file contents below):
-<
-  paste the contents of the relevant .md files from your knowledge bank
->
+Knowledge-bank files (full contents):
+<KNOWLEDGE>
 
 ---
 
 ## Output format
 
-Return a single JSON array containing all generated items and nothing else.
-No preamble, no commentary, no markdown fences.
+Return a single JSON array of items and NOTHING ELSE (no preamble,
+no markdown fences, no commentary).
 
-Example of correct output shape:
-[
-  { "id": "...", "type": "flashcard", ... },
-  { "id": "...", "type": "mcq", ... }
-]
-
-After the JSON array, on a new line, print a one-line summary:
-GENERATED: <N> flashcard(s), <N> mcq(s), <N> product-id(s) — domain: <domain> — topics: <topics>
+Then on a new line print exactly:
+GENERATED: <N> flashcard(s), <N> mcq(s), <N> product-id(s) — domain: <DOMAIN> — topics: <TOPICS>
 ```
 
 ---
 
-## After generation — maintainer checklist
+## Post-generation maintainer checklist
 
-Before committing items to the seed file, verify each one:
+Before merging draft items into the canonical seed JSON, verify each one:
 
-- [ ] Every fact is present in the source `.md` files (no hallucinations)
-- [ ] MCQ: all four options are plausible, correct answer is unambiguous
-- [ ] MCQ: explanation covers why correct is right AND top distractor is wrong
-- [ ] Flashcard: front is a clean question or term; back is a clean answer
+- [ ] Every fact is in the source `.md` files (no hallucinations)
+- [ ] MCQ: all four options plausible; correct answer unambiguous
+- [ ] MCQ: explanation covers both correct + top distractor
+- [ ] Flashcard: clean question, clean answer
 - [ ] Product-ID: `common_confusions` lists real services a learner would mix up
-- [ ] Difficulty feels right for the level (test with "would a Foundation learner know this?")
-- [ ] No markdown in `back`, `explanation`, or `description` fields
-- [ ] `icon_url` path follows the kebab-case convention used in `public/icons/`
-- [ ] Item is not a near-duplicate of an existing bank item
-- [ ] Add your initials to the commit message: `seed: add 10 networking items (reviewed: XY)`
+- [ ] Difficulty feels right ("would a Foundation learner know this?")
+- [ ] No markdown in `back`, `explanation`, `description`
+- [ ] Not a near-duplicate of an existing bank item
+- [ ] Commit message includes your initials:
+  `seed: add 10 networking items (reviewed: XY)`
 
 ## Seeding
 
 ```bash
-# Append reviewed items to the seed file
-cat new-items.json >> tools/seed/questions.json
-
-# Validate schema
-node tools/author/validate.js tools/seed/questions.json
-
-# Push to Supabase
-node tools/seed/seed.js
+# After moving reviewed draft items into supabase/seed/content/*.json
+pnpm seed
 ```

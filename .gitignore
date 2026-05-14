@@ -26,3 +26,8 @@ supabase/.temp/
 
 # Author drafts (committed via promote, not directly)
 tools/author/drafts/
+supabase/seed/content/_drafts/
+
+# Python bytecode (bank/ generation tooling)
+__pycache__/
+*.pyc
