@@ -16,19 +16,16 @@ export default function LearnIndexPage() {
           to={ROUTES.flashcards}
           title="Flashcards"
           description="Concept and term recall with self-rating. Short, focused sessions."
-          comingSoon
         />
         <ModeCard
           to={ROUTES.quiz}
           title="Quiz"
           description="Multiple-choice questions with explanations. Optional 45-second timer."
-          comingSoon
         />
         <ModeCard
           to={ROUTES.productId}
           title="Product ID"
           description="Match Azure service names to their categories."
-          comingSoon
         />
       </div>
     </section>
