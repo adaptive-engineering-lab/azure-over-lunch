@@ -21,6 +21,9 @@ build/
 # Test coverage
 coverage/
 
+# Playwright MCP local output (snapshots, console logs)
+.playwright-mcp/
+
 # Supabase local data (Docker volume mounts)
 supabase/.branches/
 supabase/.temp/
