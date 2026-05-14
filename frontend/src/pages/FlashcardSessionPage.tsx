@@ -55,7 +55,7 @@ export default function FlashcardSessionPage() {
 
   if (error) {
     return (
-      <section>
+      <section className="mx-auto w-full max-w-2xl">
         <p className="text-error">{error}</p>
         <Link to={ROUTES.flashcards} className="mt-4 inline-flex rounded-md bg-bg-elevated px-4 py-2 text-sm">
           ← Back
@@ -102,7 +102,7 @@ export default function FlashcardSessionPage() {
   }
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <div
         className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-divider"
         role="progressbar"
@@ -162,7 +162,7 @@ export default function FlashcardSessionPage() {
 function ResultsScreen({ counts, durationSeconds }: { counts: RatingCount; durationSeconds: number }) {
   const total = counts.correct + counts.almost + counts.missed;
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <h1 className="text-2xl font-bold">Session complete</h1>
       <p className="mt-1 text-fg-muted">
         {total} card{total === 1 ? '' : 's'} in {Math.max(1, Math.round(durationSeconds / 60))} min

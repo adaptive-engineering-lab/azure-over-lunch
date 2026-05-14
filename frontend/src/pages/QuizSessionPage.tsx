@@ -86,7 +86,7 @@ export default function QuizSessionPage() {
 
   if (error) {
     return (
-      <section>
+      <section className="mx-auto w-full max-w-2xl">
         <p className="text-error">{error}</p>
         <Link to={ROUTES.quiz} className="mt-4 inline-flex rounded-md bg-bg-elevated px-4 py-2 text-sm">
           ← Back
@@ -144,7 +144,7 @@ export default function QuizSessionPage() {
   }
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <div className="mb-2 flex items-center justify-between text-sm">
         <span>
           Q {idx + 1} / {questions.length}
@@ -221,7 +221,7 @@ function ResultsScreen({ answers, totalElapsed }: { answers: Answer[]; totalElap
   const byDomain = computeDomainBreakdown(answers);
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <h1 className="text-2xl font-bold">Results</h1>
       <p className="mt-1 text-fg-muted">
         {correct} of {total} correct — {scorePct}% in {Math.max(1, Math.round(totalElapsed / 60))} min

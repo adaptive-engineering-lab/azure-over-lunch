@@ -16,7 +16,7 @@ export default function SettingsPage() {
   const { user, signOut } = useAuth();
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <header className="mb-6">
         <h1 className="text-2xl font-bold">Settings</h1>
       </header>

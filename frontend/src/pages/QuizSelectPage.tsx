@@ -47,7 +47,7 @@ export default function QuizSelectPage() {
   }
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <header className="mb-6">
         <h1 className="text-2xl font-bold">Quiz</h1>
         <p className="mt-1 text-fg-muted">Multiple choice with explanations. Pick your settings.</p>

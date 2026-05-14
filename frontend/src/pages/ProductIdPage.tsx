@@ -67,7 +67,7 @@ export default function ProductIdPage() {
 
   if (!started) {
     return (
-      <section>
+      <section className="mx-auto w-full max-w-2xl">
         <header className="mb-6">
           <h1 className="text-2xl font-bold">Product ID</h1>
           <p className="mt-1 text-fg-muted">
@@ -106,7 +106,7 @@ export default function ProductIdPage() {
 
   if (error) {
     return (
-      <section>
+      <section className="mx-auto w-full max-w-2xl">
         <p className="text-error">{error}</p>
         <Link to={ROUTES.productId} className="mt-4 inline-flex rounded-md bg-bg-elevated px-4 py-2 text-sm">
           ← Back
@@ -159,7 +159,7 @@ export default function ProductIdPage() {
   }
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <div className="mb-2 text-sm text-fg-muted">
         Item {idx + 1} / {items.length}
       </div>
@@ -226,7 +226,7 @@ function ResultsScreen({
 }) {
   const missed = answered.filter((a) => a.chosen !== a.correct);
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <h1 className="text-2xl font-bold">Results</h1>
       <p className="mt-1 text-fg-muted">
         {correctCount} of {answered.length} correct in{' '}

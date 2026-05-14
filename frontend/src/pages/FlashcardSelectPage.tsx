@@ -19,7 +19,7 @@ export default function FlashcardSelectPage() {
   }
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <header className="mb-6">
         <h1 className="text-2xl font-bold">Flashcards</h1>
         <p className="mt-1 text-fg-muted">Pick a topic and a length, then start studying.</p>

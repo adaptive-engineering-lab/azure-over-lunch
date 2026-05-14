@@ -31,7 +31,7 @@ export default function SignInPage() {
 
   if (status === 'sent') {
     return (
-      <section>
+      <section className="mx-auto w-full max-w-md">
         <h1 className="text-2xl font-bold">Check your email</h1>
         <p className="mt-3 text-fg-muted">
           We sent a sign-in link to <strong className="text-fg">{email}</strong>. Tap the link to
@@ -55,7 +55,7 @@ export default function SignInPage() {
   }
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-md">
       <header className="mb-6">
         <h1 className="text-2xl font-bold">Sign in</h1>
         <p className="mt-1 text-fg-muted">

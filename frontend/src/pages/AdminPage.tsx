@@ -42,7 +42,7 @@ export default function AdminPage() {
   if (adminStatus === 'loading') return <p className="text-fg-muted">Checking access…</p>;
   if (!user || adminStatus === 'no') {
     return (
-      <section>
+      <section className="mx-auto w-full max-w-2xl">
         <h1 className="text-2xl font-bold">Not authorized</h1>
         <p className="mt-3 text-fg-muted">This area is restricted to maintainers.</p>
         <Link to={ROUTES.home} className="mt-4 inline-flex rounded-md bg-bg-elevated px-4 py-2 text-sm">
