@@ -7,6 +7,7 @@ import {
   type SessionMode,
 } from '../store';
 import { SESSIONS_CAP } from '../store/sessions';
+import { pullProfileFromServer } from './syncProfile';
 
 interface ProgressRow {
   question_id: string;
@@ -30,7 +31,7 @@ export async function hydrateStoreFromServer(
   client: SupabaseClient,
   userId: string,
 ): Promise<{ progressCount: number; sessionCount: number }> {
-  const [progressRes, sessionsRes] = await Promise.all([
+  const [progressRes, sessionsRes, profile] = await Promise.all([
     client
       .from('user_progress')
       .select('question_id, times_seen, times_correct, last_rating, next_review, updated_at')
@@ -41,6 +42,7 @@ export async function hydrateStoreFromServer(
       .eq('user_id', userId)
       .order('completed_at', { ascending: false })
       .limit(SESSIONS_CAP),
+    pullProfileFromServer(client, userId),
   ]);
   if (progressRes.error) throw new Error(`hydrate progress failed: ${progressRes.error.message}`);
   if (sessionsRes.error) throw new Error(`hydrate sessions failed: ${sessionsRes.error.message}`);
@@ -66,7 +68,7 @@ export async function hydrateStoreFromServer(
     completedAt: r.completed_at,
   }));
 
-  useAppStore.getState().hydrateFromServer({ progress, sessions });
+  useAppStore.getState().hydrateFromServer({ progress, sessions, profile });
 
   return { progressCount: Object.keys(progress).length, sessionCount: sessions.length };
 }

@@ -42,7 +42,11 @@ interface AppState {
 
   addXp: (delta: number) => void;
   bumpStreakIfDue: (today?: Date) => void;
-  hydrateFromServer: (input: { progress: GuestProgressMap; sessions: GuestSession[] }) => void;
+  hydrateFromServer: (input: {
+    progress: GuestProgressMap;
+    sessions: GuestSession[];
+    profile?: Pick<GuestProfile, 'streakDays' | 'lastActive' | 'level'> | null;
+  }) => void;
   reset: () => void;
 }
 
@@ -148,11 +152,27 @@ export const useAppStore = create<AppState>()(
         });
       },
 
-      hydrateFromServer: ({ progress, sessions }) =>
-        set(() => ({
-          progress,
-          sessions: sessions.slice(0, SESSIONS_CAP),
-        })),
+      hydrateFromServer: ({ progress, sessions, profile }) =>
+        set((s) => {
+          const nextProfile: GuestProfile = profile
+            ? {
+                ...s.profile,
+                // Take the higher streak so a fresher local bump isn't lost,
+                // and keep the most-recent lastActive.
+                streakDays: Math.max(s.profile.streakDays, profile.streakDays),
+                lastActive:
+                  !s.profile.lastActive || (profile.lastActive && profile.lastActive > s.profile.lastActive)
+                    ? profile.lastActive
+                    : s.profile.lastActive,
+                level: (Math.max(s.profile.level, profile.level) as Level),
+              }
+            : s.profile;
+          return {
+            progress,
+            sessions: sessions.slice(0, SESSIONS_CAP),
+            profile: nextProfile,
+          };
+        }),
 
       reset: () => set(() => freshState()),
     }),
