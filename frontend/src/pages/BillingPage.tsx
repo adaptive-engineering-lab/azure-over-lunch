@@ -9,21 +9,47 @@ export default function BillingPage() {
 
   if (!user) {
     return (
-      <section>
-        <h1 className="text-2xl font-bold">Billing</h1>
-        <p className="mt-3 text-fg-muted">Sign in to manage your subscription.</p>
+      <section className="mx-auto w-full max-w-2xl">
+        <header className="mb-6">
+          <h1 className="text-2xl font-bold">Billing</h1>
+          <p className="mt-2 text-fg-muted">
+            All study content is free. Pro is about making the app yours — quality-of-life polish,
+            not paywalled questions.
+          </p>
+        </header>
+
+        <div className="rounded-xl bg-bg-elevated p-5 ring-1 ring-divider">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-fg-muted">
+            What's in Pro
+          </h2>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li className="flex gap-2">
+              <span aria-hidden>✨</span>
+              <span>Extra app themes beyond Dark / Light.</span>
+            </li>
+            <li className="flex gap-2">
+              <span aria-hidden>📈</span>
+              <span>Advanced progress stats — domain mastery curves, per-topic accuracy.</span>
+            </li>
+            <li className="flex gap-2">
+              <span aria-hidden>📅</span>
+              <span>Exam-day countdown widget pinned to home.</span>
+            </li>
+          </ul>
+        </div>
+
         <Link
           to={ROUTES.signIn}
-          className="mt-4 inline-flex rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-fg"
+          className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-accent px-4 py-3 text-sm font-semibold text-accent-fg shadow-lg shadow-accent/20"
         >
-          Sign in
+          Sign in to manage your subscription →
         </Link>
       </section>
     );
   }
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <header className="mb-6">
         <h1 className="text-2xl font-bold">Billing</h1>
       </header>

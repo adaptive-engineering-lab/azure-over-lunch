@@ -37,19 +37,40 @@ export default function ProgressPage() {
 
   if (totalSessions === 0 && totalQuestions === 0) {
     return (
-      <section>
+      <section className="mx-auto w-full max-w-2xl">
         <header className="mb-6">
           <h1 className="text-2xl font-bold">Your progress</h1>
+          <p className="mt-1 text-fg-muted">
+            Streak, accuracy, and per-domain stats appear here once you complete your first session.
+          </p>
         </header>
-        <div className="rounded-lg bg-bg-elevated p-6 text-center">
-          <p className="text-fg-muted">No study activity yet.</p>
-          <Link
-            to={ROUTES.learn}
-            className="mt-4 inline-flex rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-fg"
-          >
-            Start a session
-          </Link>
+
+        <div aria-hidden className="relative">
+          <div className="grid grid-cols-2 gap-2 opacity-40 sm:grid-cols-4">
+            <Tile label="Streak" value={3} suffix="d" />
+            <Tile label="XP" value={240} />
+            <Tile label="Level" value={2} />
+            <Tile label="Accuracy" value={78} suffix="%" />
+          </div>
+          <div className="mt-4 rounded-lg bg-bg-elevated p-4 opacity-30">
+            <h2 className="text-sm font-semibold">By domain</h2>
+            <div className="mt-3 grid grid-cols-5 gap-1">
+              {[60, 80, 45, 90, 70].map((w, i) => (
+                <div key={i} className="h-2 rounded-full bg-divider">
+                  <div className="h-full rounded-full bg-accent" style={{ width: `${w}%` }} />
+                </div>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-fg-muted">Preview — yours fills in as you answer.</p>
+          </div>
         </div>
+
+        <Link
+          to={ROUTES.learn}
+          className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-accent px-4 py-3 text-sm font-semibold text-accent-fg shadow-lg shadow-accent/20"
+        >
+          Start a session →
+        </Link>
       </section>
     );
   }
@@ -62,7 +83,7 @@ export default function ProgressPage() {
   const weakAreas = domainStats.filter((s) => s.weak);
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <header className="mb-6">
         <h1 className="text-2xl font-bold">Your progress</h1>
       </header>

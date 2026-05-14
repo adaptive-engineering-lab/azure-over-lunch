@@ -57,7 +57,7 @@ export default function DailyReviewPage() {
 
   if (error) {
     return (
-      <section>
+      <section className="mx-auto w-full max-w-2xl">
         <p className="text-error">{error}</p>
         <Link to={ROUTES.home} className="mt-4 inline-flex rounded-md bg-bg-elevated px-4 py-2 text-sm">
           ← Home
@@ -68,12 +68,49 @@ export default function DailyReviewPage() {
   if (!items) return <p className="text-fg-muted">Loading…</p>;
   if (items.length === 0)
     return (
-      <section>
-        <h1 className="text-2xl font-bold">No reviews due</h1>
-        <p className="mt-2 text-fg-muted">Nothing scheduled for today — try a fresh session.</p>
-        <Link to={ROUTES.learn} className="mt-4 inline-flex rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-fg">
-          Pick a mode
-        </Link>
+      <section className="mx-auto w-full max-w-2xl">
+        <header className="mb-6">
+          <h1 className="text-2xl font-bold">No reviews due</h1>
+          <p className="mt-2 text-fg-muted">
+            Spaced repetition will surface cards here when they're scheduled. Until then, build up a
+            bank of items by studying any mode.
+          </p>
+        </header>
+
+        <div className="rounded-xl bg-bg-elevated p-5 ring-1 ring-divider">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-fg-muted">
+            How spaced repetition works
+          </h2>
+          <ul className="mt-3 space-y-2 text-sm">
+            <li className="flex gap-2">
+              <span aria-hidden className="text-accent">1.</span>
+              <span>You answer a question — correct, almost, or missed.</span>
+            </li>
+            <li className="flex gap-2">
+              <span aria-hidden className="text-accent">2.</span>
+              <span>The system schedules the next review (1 day → 3 → 7 → 14 → 30 …).</span>
+            </li>
+            <li className="flex gap-2">
+              <span aria-hidden className="text-accent">3.</span>
+              <span>When that date arrives, the card appears here for a quick check.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+          <Link
+            to={ROUTES.flashcards}
+            className="flex-1 rounded-md bg-accent px-4 py-3 text-center text-sm font-semibold text-accent-fg shadow-lg shadow-accent/20"
+          >
+            Study flashcards →
+          </Link>
+          <Link
+            to={ROUTES.quiz}
+            className="flex-1 rounded-md bg-bg px-4 py-3 text-center text-sm font-medium ring-1 ring-divider"
+          >
+            Try a quiz
+          </Link>
+        </div>
       </section>
     );
 
@@ -123,7 +160,7 @@ export default function DailyReviewPage() {
   }
 
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <div
         className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-divider"
         role="progressbar"
@@ -338,7 +375,7 @@ function Results({
   const correct = outcomes.filter((o) => o.rating === 'correct').length;
   const total = outcomes.length;
   return (
-    <section>
+    <section className="mx-auto w-full max-w-2xl">
       <h1 className="text-2xl font-bold">Review complete</h1>
       <p className="mt-1 text-fg-muted">
         {correct} of {total} correct · {Math.max(1, Math.round(durationSeconds / 60))} min
