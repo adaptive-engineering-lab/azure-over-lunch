@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '../lib/routes';
 import { StreakBadge } from '../components/StreakBadge';
 import { XpBadge } from '../components/XpBadge';
-import { DomainCoverage } from '../components/DomainCoverage';
 import { useAppStore } from '../lib/store';
 import { findDueQuestionIds } from '../lib/dashboard/due';
 import { useDomainCounts } from '../lib/dashboard/useDomainCounts';
@@ -77,8 +76,6 @@ export default function HomePage() {
           )}
         </aside>
       </div>
-
-      <DomainCoverage />
     </section>
   );
 }
