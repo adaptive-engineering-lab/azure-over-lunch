@@ -2,8 +2,10 @@
 
 **Feature Branch**: `013-admin-editor`
 **Created**: 2026-05-11
-**Status**: Draft
+**Status**: Superseded by live-edit pivot (2026-05-14) — see [plan.md](./plan.md)
 **Input**: User description: "Optional in-app editor for the question bank. Routes through the existing git/seed workflow — no service-role key in the client, no live DB writes from the browser."
+
+> **2026-05-14 Pivot**: The export-to-JSON workflow described below is replaced by **live RLS-aware edits** that write directly to Supabase using the admin user's JWT. The functional requirements that follow (FR-005, FR-010, FR-012, etc.) are kept for historical reference but no longer drive implementation. See [plan.md](./plan.md) for the active design and [tasks.md](./tasks.md) for the build steps.
 
 ## User Scenarios & Testing *(mandatory)*
 
