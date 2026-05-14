@@ -10,7 +10,10 @@
       "service_name": "Microsoft Entra ID",
       "category": "Identity",
       "description": "Cloud-based identity and access management service providing SSO, MFA, conditional access, and identity governance for users, groups, and applications.",
-      "common_confusions": ["Azure AD B2C", "Microsoft Entra ID Governance"]
+      "common_confusions": [
+        "Azure AD B2C",
+        "Microsoft Entra ID Governance"
+      ]
     }
   },
   {
@@ -24,7 +27,10 @@
       "service_name": "Azure Policy",
       "category": "Identity",
       "description": "Service that enforces organizational standards by evaluating resources against rules and policies, denying non-compliant deployments or flagging existing resources for remediation.",
-      "common_confusions": ["Azure Blueprints", "Azure RBAC"]
+      "common_confusions": [
+        "Azure Blueprints",
+        "Azure RBAC"
+      ]
     }
   },
   {
@@ -38,7 +44,10 @@
       "service_name": "Azure Blob Storage",
       "category": "Storage",
       "description": "Massively scalable object storage for unstructured data such as documents, images, videos, backups, and logs. Supports hot, cool, cold, and archive tiers.",
-      "common_confusions": ["Azure Files", "Azure Data Lake Storage Gen2"]
+      "common_confusions": [
+        "Azure Files",
+        "Azure Data Lake Storage Gen2"
+      ]
     }
   },
   {
@@ -52,7 +61,10 @@
       "service_name": "Azure Files",
       "category": "Storage",
       "description": "Fully managed file shares in the cloud accessible via SMB and NFS protocols. Used for lift-and-shift workloads, shared application settings, and cross-platform file access.",
-      "common_confusions": ["Azure NetApp Files", "Azure Blob Storage"]
+      "common_confusions": [
+        "Azure NetApp Files",
+        "Azure Blob Storage"
+      ]
     }
   },
   {
@@ -66,7 +78,10 @@
       "service_name": "Virtual Machine Scale Sets",
       "category": "Compute",
       "description": "Service for deploying and managing a group of identical, load-balanced VMs that automatically scale in or out based on demand or schedule.",
-      "common_confusions": ["Availability Sets", "Azure Kubernetes Service"]
+      "common_confusions": [
+        "Availability Sets",
+        "Azure Kubernetes Service"
+      ]
     }
   },
   {
@@ -80,7 +95,10 @@
       "service_name": "Azure Container Instances",
       "category": "Compute",
       "description": "Run individual containers without managing servers or orchestrators. Per-second billing, fast startup, ideal for short-lived workloads, build agents, and event-driven tasks.",
-      "common_confusions": ["Azure Kubernetes Service", "Azure App Service"]
+      "common_confusions": [
+        "Azure Kubernetes Service",
+        "Azure App Service"
+      ]
     }
   },
   {
@@ -94,7 +112,10 @@
       "service_name": "Azure Bastion",
       "category": "Networking",
       "description": "Provides secure RDP and SSH access to virtual machines directly through the Azure portal over TLS, without exposing the VM's public IP address.",
-      "common_confusions": ["VPN Gateway", "Azure Firewall"]
+      "common_confusions": [
+        "VPN Gateway",
+        "Azure Firewall"
+      ]
     }
   },
   {
@@ -108,7 +129,10 @@
       "service_name": "Azure Application Gateway",
       "category": "Networking",
       "description": "Layer-7 (HTTP/HTTPS) regional load balancer with URL-path routing, SSL termination, cookie-based session affinity, and an integrated Web Application Firewall.",
-      "common_confusions": ["Azure Front Door", "Azure Load Balancer"]
+      "common_confusions": [
+        "Azure Front Door",
+        "Azure Load Balancer"
+      ]
     }
   },
   {
@@ -122,7 +146,10 @@
       "service_name": "Log Analytics Workspace",
       "category": "Monitoring",
       "description": "Centralized data store and query engine for log and telemetry data from Azure resources and external systems. Queries are written in Kusto Query Language (KQL).",
-      "common_confusions": ["Application Insights", "Azure Data Explorer"]
+      "common_confusions": [
+        "Application Insights",
+        "Azure Data Explorer"
+      ]
     }
   },
   {
@@ -136,7 +163,10 @@
       "service_name": "Azure Site Recovery",
       "category": "Monitoring",
       "description": "Disaster recovery service that replicates Azure VMs, on-prem VMs, and physical servers to a secondary region for orchestrated failover during region or datacenter outages.",
-      "common_confusions": ["Azure Backup", "Azure Migrate"]
+      "common_confusions": [
+        "Azure Backup",
+        "Azure Migrate"
+      ]
     }
   },
   {
@@ -150,7 +180,10 @@
       "service_name": "Virtual Network (VNet)",
       "category": "Networking",
       "description": "The foundational private network in Azure. Lets resources such as VMs and databases communicate securely with each other, the internet, and on-premises networks. Your own isolated network segment in the cloud.",
-      "common_confusions": ["VNet Peering", "Subnet"]
+      "common_confusions": [
+        "VNet Peering",
+        "Subnet"
+      ]
     }
   },
   {
@@ -164,7 +197,10 @@
       "service_name": "Network Security Group (NSG)",
       "category": "Networking",
       "description": "A subnet- or NIC-level firewall with inbound/outbound rules that allow or deny traffic based on source, destination, port, and protocol.",
-      "common_confusions": ["Azure Firewall", "Application Security Group"]
+      "common_confusions": [
+        "Azure Firewall",
+        "Application Security Group"
+      ]
     }
   },
   {
@@ -178,21 +214,10 @@
       "service_name": "Azure Load Balancer",
       "category": "Networking",
       "description": "Layer-4 (TCP/UDP) regional load balancer that distributes inbound traffic across multiple backend VMs. Comes in Public (internet-facing) and Internal (in-VNet) flavors for high availability and scale-out.",
-      "common_confusions": ["Azure Application Gateway", "Azure Front Door"]
-    }
-  },
-  {
-    "id": "a3000000-dd00-4000-8000-00000000000e",
-    "type": "product-id",
-    "domain": "networking",
-    "topic": "application-gateway",
-    "difficulty": 2,
-    "source": "bank",
-    "content": {
-      "service_name": "Azure Application Gateway",
-      "category": "Networking",
-      "description": "Layer-7 (HTTP/HTTPS) load balancer with URL path routing, host-header routing, cookie-based affinity, SSL termination, and an integrated Web Application Firewall.",
-      "common_confusions": ["Azure Load Balancer", "Azure Front Door"]
+      "common_confusions": [
+        "Azure Application Gateway",
+        "Azure Front Door"
+      ]
     }
   },
   {
@@ -206,7 +231,10 @@
       "service_name": "Azure DNS",
       "category": "Networking",
       "description": "Hosted DNS service that resolves domain names to IP addresses. Supports public zones (internet-facing) and private zones (resolution within VNets only).",
-      "common_confusions": ["Private DNS Zones", "Traffic Manager"]
+      "common_confusions": [
+        "Private DNS Zones",
+        "Traffic Manager"
+      ]
     }
   },
   {
@@ -220,7 +248,10 @@
       "service_name": "VPN Gateway",
       "category": "Networking",
       "description": "Encrypted IPsec/IKE tunnels between an Azure VNet and on-premises networks (Site-to-Site) or individual devices (Point-to-Site) over the public internet.",
-      "common_confusions": ["ExpressRoute", "Azure Bastion"]
+      "common_confusions": [
+        "ExpressRoute",
+        "Azure Bastion"
+      ]
     }
   },
   {
@@ -234,21 +265,10 @@
       "service_name": "Azure ExpressRoute",
       "category": "Networking",
       "description": "Private, dedicated connection from on-premises to Azure — not over the public internet. Higher reliability, lower latency, and consistent bandwidth versus VPN. Enterprise hybrid connectivity.",
-      "common_confusions": ["VPN Gateway", "Virtual WAN"]
-    }
-  },
-  {
-    "id": "a3000000-dd00-4000-8000-000000000012",
-    "type": "product-id",
-    "domain": "networking",
-    "topic": "bastion",
-    "difficulty": 1,
-    "source": "bank",
-    "content": {
-      "service_name": "Azure Bastion (admin entry)",
-      "category": "Networking",
-      "description": "Secure RDP and SSH access to VMs through the Azure portal, with no public IP exposure on the VM. Sits inside the VNet as a managed jump host.",
-      "common_confusions": ["VPN Gateway", "Just-in-Time VM access"]
+      "common_confusions": [
+        "VPN Gateway",
+        "Virtual WAN"
+      ]
     }
   },
   {
@@ -262,7 +282,10 @@
       "service_name": "Azure Firewall",
       "category": "Networking",
       "description": "Fully managed cloud-native firewall at the VNet perimeter. Supports application rules (FQDNs), network rules, NAT rules, and threat intelligence. Cross-VNet scope, more powerful than NSGs.",
-      "common_confusions": ["Network Security Group (NSG)", "Application Gateway WAF"]
+      "common_confusions": [
+        "Network Security Group (NSG)",
+        "Application Gateway WAF"
+      ]
     }
   },
   {
@@ -276,7 +299,656 @@
       "service_name": "Azure Virtual WAN",
       "category": "Networking",
       "description": "Networking service that unifies routing, VPN, and ExpressRoute into a single managed hub. Used for large-scale branch-to-branch and branch-to-Azure connectivity. Replaces manually-built hub-spoke topologies.",
-      "common_confusions": ["ExpressRoute", "VPN Gateway"]
+      "common_confusions": [
+        "ExpressRoute",
+        "VPN Gateway"
+      ]
+    }
+  },
+  {
+    "id": "a3000050-dd00-4000-8000-000000000001",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "vm-sku",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Virtual Machines",
+      "category": "Compute",
+      "description": "IaaS service for running Windows or Linux workloads with full OS-level control over compute, networking, and disks.",
+      "common_confusions": [
+        "Azure App Service",
+        "Azure Container Instances"
+      ]
+    }
+  },
+  {
+    "id": "a3000050-dd00-4000-8000-000000000002",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "app-service",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure App Service",
+      "category": "Compute",
+      "description": "Fully managed PaaS for hosting web apps, REST APIs, and mobile backends without managing the underlying OS or web server.",
+      "common_confusions": [
+        "Azure Functions",
+        "Azure Container Apps"
+      ]
+    }
+  },
+  {
+    "id": "a3000050-dd00-4000-8000-000000000003",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "app-service",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "App Service Plan",
+      "category": "Compute",
+      "description": "The pricing-tier and compute container that hosts one or more App Service apps; defines the VM size, scale count, and feature set.",
+      "common_confusions": [
+        "Azure App Service",
+        "Azure Virtual Machine"
+      ]
+    }
+  },
+  {
+    "id": "a3000050-dd00-4000-8000-000000000004",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "availability",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Availability Set",
+      "category": "Compute",
+      "description": "A logical grouping of VMs that spreads them across fault and update domains in a single datacenter to protect against hardware failures and planned maintenance.",
+      "common_confusions": [
+        "Availability Zone",
+        "Virtual Machine Scale Set"
+      ]
+    }
+  },
+  {
+    "id": "a3000050-dd00-4000-8000-000000000005",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "availability",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Availability Zone",
+      "category": "Compute",
+      "description": "Physically separate datacenters within an Azure region; placing VMs in different zones protects against an entire datacenter outage, not just rack-level failures.",
+      "common_confusions": [
+        "Availability Set",
+        "Azure Region Pair"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000001",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "cloud-shell",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Cloud Shell",
+      "category": "Identity",
+      "description": "Browser-accessible Bash or PowerShell environment for managing Azure resources, with az CLI and Az modules pre-installed and a persistent Files share.",
+      "common_confusions": [
+        "Azure CLI (local install)",
+        "Azure PowerShell (local install)"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000002",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "arm",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Resource Manager (ARM)",
+      "category": "Identity",
+      "description": "Azure's deployment and management plane. All portal, CLI, PowerShell, and SDK calls go through ARM, which enforces RBAC, policy, locks, and tagging.",
+      "common_confusions": [
+        "ARM template",
+        "Azure Service Manager (classic)"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000003",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "entra-id",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Microsoft Entra ID Governance",
+      "category": "Identity",
+      "description": "Identity governance add-on with access reviews, entitlement management, privileged identity management, and lifecycle workflows for users and guests.",
+      "common_confusions": [
+        "Microsoft Entra ID",
+        "Azure Policy"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000004",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "entra-id",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Microsoft Entra Domain Services (Entra DS)",
+      "category": "Identity",
+      "description": "Managed domain service offering Kerberos, NTLM, LDAP, and domain-join for legacy workloads, without deploying or patching domain controllers.",
+      "common_confusions": [
+        "Microsoft Entra ID",
+        "Active Directory Domain Services (on-prem)"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000005",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "entra-id",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Microsoft Entra Connect",
+      "category": "Identity",
+      "description": "Hybrid sync agent that replicates users, groups, and password hashes from on-prem Active Directory into Microsoft Entra ID.",
+      "common_confusions": [
+        "Microsoft Entra Connect Sync",
+        "Microsoft Entra Domain Services"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000006",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "rbac",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure RBAC",
+      "category": "Identity",
+      "description": "Role-based access control on ARM resources, assigning roles (Owner, Contributor, Reader, custom) at management group, subscription, resource-group, or resource scope.",
+      "common_confusions": [
+        "Microsoft Entra ID roles",
+        "Azure Policy"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000007",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "azure-policy",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Blueprints",
+      "category": "Identity",
+      "description": "Bundles ARM templates, policy assignments, RBAC, and resource groups into a single deployable artifact for repeatable governed environments.",
+      "common_confusions": [
+        "Azure Policy",
+        "ARM template"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000008",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "management-groups",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Management Groups",
+      "category": "Identity",
+      "description": "Containers above subscriptions that organize them into a hierarchy so policy and RBAC can be applied at scale across many subscriptions.",
+      "common_confusions": [
+        "Subscription",
+        "Resource Group"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000009",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "resource-locks",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Resource Locks",
+      "category": "Identity",
+      "description": "ARM-level locks that prevent accidental modification or deletion. ReadOnly blocks updates and deletes; CanNotDelete blocks deletes only.",
+      "common_confusions": [
+        "Azure Policy deny effects",
+        "RBAC role deny"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000010",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "sspr",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Self-Service Password Reset (SSPR)",
+      "category": "Identity",
+      "description": "Entra ID feature that lets users reset or unlock their own accounts using verified methods (phone, email, security questions, Authenticator).",
+      "common_confusions": [
+        "Multi-Factor Authentication",
+        "Password write-back via Entra Connect"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000011",
+    "type": "product-id",
+    "domain": "identity-governance",
+    "topic": "conditional-access",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Conditional Access",
+      "category": "Identity",
+      "description": "Entra ID policy engine that grants or blocks sign-in based on signals like user, group, app, device, location, and risk — typically enforcing MFA.",
+      "common_confusions": [
+        "Multi-Factor Authentication",
+        "Azure RBAC"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000012",
+    "type": "product-id",
+    "domain": "storage",
+    "topic": "storage-accounts",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Storage Account",
+      "category": "Storage",
+      "description": "Top-level container that holds Blob, File, Queue, Table, and Data Lake data with a globally unique namespace and a chosen redundancy and performance tier.",
+      "common_confusions": [
+        "Azure Blob Storage",
+        "Storage Account container"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000013",
+    "type": "product-id",
+    "domain": "storage",
+    "topic": "blob",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Data Lake Storage Gen2",
+      "category": "Storage",
+      "description": "Blob Storage with hierarchical namespace enabled, adding directory semantics and POSIX-style ACLs for analytics workloads over HDFS-compatible APIs.",
+      "common_confusions": [
+        "Azure Blob Storage",
+        "Azure Synapse Analytics"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000014",
+    "type": "product-id",
+    "domain": "storage",
+    "topic": "azure-files",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure File Sync",
+      "category": "Storage",
+      "description": "Agent for Windows Server that caches frequently used files locally while keeping the cloud Azure Files share authoritative — a hybrid file-server.",
+      "common_confusions": [
+        "Azure Files",
+        "DFS Replication"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000015",
+    "type": "product-id",
+    "domain": "storage",
+    "topic": "sas-tokens",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Shared Access Signature (SAS)",
+      "category": "Storage",
+      "description": "Time-limited, signed URI granting delegated, scoped permissions to a storage resource without sharing the storage account key.",
+      "common_confusions": [
+        "Storage account access key",
+        "Anonymous public access"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000016",
+    "type": "product-id",
+    "domain": "storage",
+    "topic": "key-vault",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Key Vault",
+      "category": "Security",
+      "description": "Managed secret, key, and certificate store. Used to hold customer-managed encryption keys (BYOK) for storage, SQL, disks, and to provide secrets to apps.",
+      "common_confusions": [
+        "Microsoft Entra ID secrets",
+        "Azure Managed HSM"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000017",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "vm-sku",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Spot Virtual Machines",
+      "category": "Compute",
+      "description": "VMs offered at deep discount on unused Azure capacity; Azure can evict them with 30 s notice when capacity or your max price changes.",
+      "common_confusions": [
+        "Reserved Instances",
+        "Standard pay-as-you-go VMs"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000018",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "vm-sku",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Compute Gallery",
+      "category": "Compute",
+      "description": "Repository for sharing and versioning custom VM images (and now app definitions) across subscriptions and regions, replacing the older Shared Image Gallery name.",
+      "common_confusions": [
+        "Azure Marketplace images",
+        "VM Image (legacy)"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000019",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "containers",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Container Apps",
+      "category": "Compute",
+      "description": "Serverless container platform with built-in autoscaling, HTTPS ingress, KEDA-based event scaling, and microservice features — without managing Kubernetes nodes.",
+      "common_confusions": [
+        "Azure Container Instances",
+        "Azure Kubernetes Service"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000020",
+    "type": "product-id",
+    "domain": "compute",
+    "topic": "containers",
+    "difficulty": 3,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Kubernetes Service (AKS)",
+      "category": "Compute",
+      "description": "Managed Kubernetes control plane with self-managed worker node pools; Microsoft handles control-plane upgrades, you size and scale the data plane.",
+      "common_confusions": [
+        "Azure Container Apps",
+        "Azure Service Fabric"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000021",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "vnet-peering",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "VNet Peering",
+      "category": "Networking",
+      "description": "Low-latency, private connection between two VNets in the same region (regional) or different regions (global), using Microsoft's backbone — no gateway required.",
+      "common_confusions": [
+        "VPN Gateway (VNet-to-VNet)",
+        "Azure Virtual WAN"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000022",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Application Security Group (ASG)",
+      "category": "Networking",
+      "description": "Logical grouping of VM NICs that NSG rules can use as source or destination, replacing brittle IP-based rules with membership-based ones.",
+      "common_confusions": [
+        "Network Security Group (NSG)",
+        "Service Tag"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000023",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "dns",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Private DNS",
+      "category": "Networking",
+      "description": "Hosts private DNS zones for resolution inside one or more VNets, including auto-registration of VM A records — no public DNS exposure.",
+      "common_confusions": [
+        "Azure DNS (public)",
+        "Azure Private Endpoint"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000024",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "vnet",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Network Watcher",
+      "category": "Networking",
+      "description": "Suite of network observability tools — IP flow verify, connection troubleshoot, packet capture, NSG flow logs, topology — for diagnosing VNet problems.",
+      "common_confusions": [
+        "Azure Monitor",
+        "Connection Monitor"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000025",
+    "type": "product-id",
+    "domain": "networking",
+    "topic": "private-endpoint",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Private Endpoint",
+      "category": "Networking",
+      "description": "Network interface inside your VNet that maps a PaaS service (Storage, SQL, Key Vault, etc.) to a private IP, removing public-internet exposure.",
+      "common_confusions": [
+        "Service Endpoint",
+        "Private Link Service"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000026",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "metrics",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Monitor",
+      "category": "Monitoring",
+      "description": "Umbrella platform for telemetry — metrics, logs, alerts, dashboards — that other observability features (App Insights, Log Analytics) feed into.",
+      "common_confusions": [
+        "Log Analytics workspace",
+        "Azure Network Watcher"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000027",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "log-analytics",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Monitor Agent (AMA)",
+      "category": "Monitoring",
+      "description": "Successor agent that collects performance metrics, event logs, and syslog from Windows/Linux machines and sends them to Log Analytics or Azure Monitor.",
+      "common_confusions": [
+        "Log Analytics agent (MMA)",
+        "Telegraf agent"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000028",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "log-analytics",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Application Insights",
+      "category": "Monitoring",
+      "description": "Application performance monitoring component of Azure Monitor — request rates, dependencies, exceptions, distributed traces — typically stored in a Log Analytics workspace.",
+      "common_confusions": [
+        "Azure Monitor",
+        "Log Analytics workspace"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000029",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "log-analytics",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Activity Log",
+      "category": "Monitoring",
+      "description": "Subscription-scoped audit log of management-plane operations (who started or stopped a VM, who changed RBAC) — distinct from in-resource diagnostic logs.",
+      "common_confusions": [
+        "Diagnostic logs",
+        "Microsoft Entra ID audit logs"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000030",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "alerts",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Action Group",
+      "category": "Monitoring",
+      "description": "Reusable set of notification and automation targets (email, SMS, webhook, Logic App, runbook) that an Azure Monitor alert rule fires into when triggered.",
+      "common_confusions": [
+        "Alert rule",
+        "Notification setting"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000031",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "backup",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Azure Backup",
+      "category": "Monitoring",
+      "description": "Managed backup service for Azure VMs, Azure Files, SQL/SAP in VMs, and on-prem workloads, storing recovery points in a vault with policy-based scheduling.",
+      "common_confusions": [
+        "Azure Site Recovery",
+        "VM snapshots"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000032",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "backup",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Recovery Services Vault",
+      "category": "Monitoring",
+      "description": "Older vault type supporting Azure VM backup, Azure Files backup, on-prem agent backup, SQL-in-VM backup, and Azure Site Recovery for DR orchestration.",
+      "common_confusions": [
+        "Backup vault",
+        "Storage account"
+      ]
+    }
+  },
+  {
+    "id": "a3000100-dd00-4000-8000-000000000033",
+    "type": "product-id",
+    "domain": "monitoring",
+    "topic": "backup",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "service_name": "Backup Vault",
+      "category": "Monitoring",
+      "description": "Newer vault type supporting managed-disk, blob, PostgreSQL, Kubernetes, and Azure Database for PostgreSQL backups — workloads not handled by Recovery Services Vault.",
+      "common_confusions": [
+        "Recovery Services vault",
+        "Storage account"
+      ]
     }
   }
 ]

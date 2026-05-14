@@ -473,5 +473,100 @@
       "correct": "B",
       "explanation": "ASR uses near-continuous replication with a typical RPO of approximately 30 seconds to a few minutes depending on workload and disk-change rate. Zero RPO requires synchronous replication, which ASR does not perform across regions. Hour or day RPOs are characteristic of backup, not DR replication."
     }
+  },
+  {
+    "id": "a2000050-bb00-4000-8000-000000000001",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "redundancy",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "question": "A regulator requires that data survive both a single-datacenter outage AND an entire-region outage, with the secondary region readable during a regional incident. Which storage redundancy option meets this requirement at the lowest configuration?",
+      "options": {
+        "A": "LRS",
+        "B": "ZRS",
+        "C": "GRS",
+        "D": "RA-GZRS"
+      },
+      "correct": "D",
+      "explanation": "RA-GZRS combines ZRS in the primary region (3 availability zones — survives a datacenter outage) with asynchronous geo-replication to a secondary region that is always readable without a Microsoft-initiated failover. GRS would protect against region loss but requires Microsoft to fail over before the secondary becomes readable; ZRS only covers zone failures within a single region."
+    }
+  },
+  {
+    "id": "a2000050-bb00-4000-8000-000000000002",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "blob-tiers",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "question": "Compliance logs must be retained for seven years, are written daily, and almost never read. Which access tier gives the lowest storage cost while keeping the data online enough that an auditor can fetch it within minutes if asked?",
+      "options": {
+        "A": "Hot",
+        "B": "Cool",
+        "C": "Cold",
+        "D": "Archive"
+      },
+      "correct": "C",
+      "explanation": "Cold tier targets data stored for at least 90 days with millisecond retrieval latency at a lower storage rate than Cool. Archive is even cheaper but is offline — retrieval takes hours of rehydration — which would fail the 'minutes' requirement. Hot and Cool both cost more to store the data."
+    }
+  },
+  {
+    "id": "a2000050-bb00-4000-8000-000000000003",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "sas-tokens",
+    "difficulty": 3,
+    "source": "ai-generated",
+    "content": {
+      "question": "A team needs to grant a partner read-only access to blobs in one container for 24 hours. Security policy forbids exposing the storage account key. Which SAS option best satisfies both requirements?",
+      "options": {
+        "A": "Account SAS signed with the storage account key",
+        "B": "Service SAS signed with the storage account key",
+        "C": "User delegation SAS signed with Microsoft Entra credentials",
+        "D": "Anonymous public read access on the container"
+      },
+      "correct": "C",
+      "explanation": "A user delegation SAS is signed with Entra ID credentials instead of the storage account key, so the key is never exposed. It is also scoped to Blob Storage, which is exactly what the partner needs. Account and Service SAS both require the account key to sign; anonymous public access removes authorization entirely and violates the read-only-for-one-partner intent."
+    }
+  },
+  {
+    "id": "a2000050-bb00-4000-8000-000000000004",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "lifecycle",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "question": "Which statement about blob lifecycle management rules is correct?",
+      "options": {
+        "A": "Rules run continuously and react within seconds of a blob being modified.",
+        "B": "Rules use IF (days since last modified or accessed) THEN (transition tier or delete) logic and are evaluated by Azure on a periodic schedule.",
+        "C": "Rules can move blobs between storage accounts.",
+        "D": "Rules apply only to page blobs."
+      },
+      "correct": "B",
+      "explanation": "Lifecycle policies are if/then rules keyed off blob age (days since last modified or accessed), evaluated periodically by the platform — not in real time. They transition between access tiers or delete within a single storage account; cross-account movement is handled by object replication. They apply to block blobs (and append blobs for delete), not page blobs."
+    }
+  },
+  {
+    "id": "a2000050-bb00-4000-8000-000000000005",
+    "type": "mcq",
+    "domain": "storage",
+    "topic": "azure-files",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "question": "A Windows file share is being lifted to Azure. The team needs SMB access from on-prem clients and the option to keep a local cache for low-latency reads. Which Azure service fits best?",
+      "options": {
+        "A": "Azure Blob Storage with NFS 3.0 enabled",
+        "B": "Azure Files with Azure File Sync",
+        "C": "Azure Data Lake Storage Gen2",
+        "D": "Azure NetApp Files (Standard)"
+      },
+      "correct": "B",
+      "explanation": "Azure Files exposes fully managed SMB shares, and Azure File Sync caches frequently used files on a local Windows Server while keeping the cloud share authoritative. Blob Storage is object storage and does not natively expose SMB. Data Lake Gen2 targets analytics workloads over HDFS/REST, not SMB. NetApp Files supports SMB but is enterprise-grade and overshoots the simple lift-and-cache scenario described."
+    }
   }
 ]

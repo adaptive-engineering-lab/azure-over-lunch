@@ -178,5 +178,65 @@
       "front": "What is the difference between a Recovery Services vault and a Backup vault?",
       "back": "Recovery Services vault — older service supporting Azure VM backup, Azure Files backup, on-prem agent backup, SQL in Azure VM, and Azure Site Recovery (DR). Backup vault — newer service for managed-disk, blob, PostgreSQL, Kubernetes, and Azure Database for PostgreSQL backups. Each workload type maps to one vault type; you cannot mix."
     }
+  },
+  {
+    "id": "a1000050-fc00-4000-8000-000000000001",
+    "type": "flashcard",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "front": "What is the default inbound rule that blocks all traffic in every Azure NSG?",
+      "back": "DenyAllInbound at priority 65500. It denies any inbound traffic from any source to any destination. It cannot be deleted, but you can override it by creating a rule with a lower priority number (100–4096)."
+    }
+  },
+  {
+    "id": "a1000050-fc00-4000-8000-000000000002",
+    "type": "flashcard",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "front": "What is the valid priority range for a custom NSG rule, and which number wins?",
+      "back": "Custom NSG rules use priorities from 100 to 4096. Lower numbers have higher priority and are evaluated first. The first matching rule is applied; later rules are never evaluated."
+    }
+  },
+  {
+    "id": "a1000050-fc00-4000-8000-000000000003",
+    "type": "flashcard",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 1,
+    "source": "ai-generated",
+    "content": {
+      "front": "What is an Azure service tag in an NSG rule?",
+      "back": "A service tag is a Microsoft-managed label for a group of IP prefixes used by a specific Azure service, such as Internet, VirtualNetwork, AzureLoadBalancer, or Storage. Using a service tag avoids hard-coding IP addresses, which Microsoft keeps updated automatically."
+    }
+  },
+  {
+    "id": "a1000050-fc00-4000-8000-000000000004",
+    "type": "flashcard",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "front": "When an NSG is attached to both a subnet and a NIC, what must happen for inbound traffic to reach the VM?",
+      "back": "The traffic must be allowed by the subnet NSG first and then by the NIC NSG. If either NSG denies it, the packet is dropped. For outbound traffic the order reverses: NIC NSG first, then subnet NSG."
+    }
+  },
+  {
+    "id": "a1000050-fc00-4000-8000-000000000005",
+    "type": "flashcard",
+    "domain": "networking",
+    "topic": "nsg",
+    "difficulty": 2,
+    "source": "ai-generated",
+    "content": {
+      "front": "What is an Application Security Group (ASG) and what problem does it solve?",
+      "back": "An ASG is a logical grouping of VM NICs used as the source or destination of NSG rules. It replaces brittle IP-based rules with group-based ones, so adding or removing a VM from the ASG automatically updates which traffic the rule covers. All NICs in an ASG must live in the same VNet and region."
+    }
   }
 ]
